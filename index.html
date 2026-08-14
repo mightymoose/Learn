@@ -6,8 +6,9 @@
 <title>Learn</title>
 <meta name="description" content="Lessons and reference cards, searchable.">
 <style>
-/* Token names match algebra/assets/lesson.css so the index and the pages
-   it links look like one site. */
+/* Token names match each subject's assets/lesson.css so the index and the
+   pages it links look like one site. Subjects may set their own accent in
+   their own stylesheet. The index keeps one accent for the whole shelf. */
 :root {
   --ink: #111008;
   --ink-soft: #4a4740;
@@ -91,6 +92,7 @@ h1 {
 .search::placeholder { color: var(--ink-faint); }
 
 .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.7rem; align-items: center; }
+.chips + .chips { margin-top: 0.45rem; }
 
 .chip {
   font-family: var(--mono);
@@ -156,6 +158,7 @@ h1 {
   white-space: nowrap;
 }
 .badge.warn { border-color: var(--accent); color: var(--accent); }
+.badge.start { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 
 .card-summary { color: var(--ink-soft); font-size: 0.95rem; margin: 0.2rem 0 0.5rem; }
 
@@ -194,10 +197,11 @@ kbd {
 </head>
 <body>
 
-<p class="kicker">Shelf</p>
+<p class="kicker">Index</p>
 <h1>Learn</h1>
-<p class="tagline">Lessons and reference cards, built from the books in this repository.
-Press <kbd>/</kbd> to search.</p>
+<p class="tagline">Lessons and reference cards, built from books and primary sources.
+Pick a subject, or press <kbd>/</kbd> to search. A subject link such as
+<code>#excel</code> opens the page already filtered.</p>
 
 <div id="root"></div>
 
@@ -264,6 +268,52 @@ Press <kbd>/</kbd> to search.</p>
   var useMemo = React.useMemo;
   var useRef = React.useRef;
 
+  /* ---------- subjects and the #subject deep link ----------
+     Every access to location and history is guarded. This script is executed
+     by tools/test-app.js in a sandbox with no window.location, and a deep
+     link is a convenience that must never break the page. */
+
+  var subjects = (function () {
+    var seen = {};
+    var out = [];
+    entries.forEach(function (e) {
+      if (e.subject && !seen[e.subject]) {
+        seen[e.subject] = true;
+        out.push(e.subject);
+      }
+    });
+    return out.sort();
+  })();
+
+  function readHash() {
+    try {
+      var loc = window.location;
+      var raw = loc && loc.hash ? String(loc.hash).replace(/^#/, "") : "";
+      if (!raw) return "all";
+      var want = decodeURIComponent(raw).toLowerCase();
+      for (var i = 0; i < subjects.length; i++) {
+        if (subjects[i].toLowerCase() === want) return subjects[i];
+      }
+      return "all";
+    } catch (e) {
+      return "all";
+    }
+  }
+
+  function writeHash(value) {
+    try {
+      var loc = window.location;
+      var hist = window.history;
+      if (!loc || !hist || !hist.replaceState) return;
+      var base = loc.pathname + loc.search;
+      hist.replaceState(null, "", value === "all"
+        ? base
+        : base + "#" + encodeURIComponent(String(value).toLowerCase()));
+    } catch (e) {
+      /* a deep link is a convenience, never a hard failure */
+    }
+  }
+
   // Wrap query matches in <mark> without using dangerouslySetInnerHTML.
   function highlight(text, terms) {
     if (!text) return null;
@@ -284,6 +334,7 @@ Press <kbd>/</kbd> to search.</p>
     var e = props.entry;
     var terms = props.terms;
     var ahead = e.status === "ahead-of-sequence";
+    var start = e.status === "start-here";
     var meta = [e.source, e.section].filter(Boolean).join(" · ");
     return html`
       <a class="card" href=${e.path}>
@@ -291,6 +342,7 @@ Press <kbd>/</kbd> to search.</p>
           <span class="card-title">${highlight(e.title, terms)}</span>
           <span class="badge">${e.type}</span>
           ${ahead && html`<span class="badge warn" title="Covers a section the lesson sequence has not reached">ahead of sequence</span>`}
+          ${start && html`<span class="badge start" title="Open this one first">start here</span>`}
         </span>
         <p class="card-summary">${highlight(e.summary, terms)}</p>
         <span class="card-meta">${meta}</span>
@@ -302,7 +354,14 @@ Press <kbd>/</kbd> to search.</p>
     var query = q[0], setQuery = q[1];
     var t = useState("all");
     var type = t[0], setType = t[1];
+    var sub = useState(readHash);
+    var subject = sub[0], setSubject = sub[1];
     var inputRef = useRef(null);
+
+    function chooseSubject(id) {
+      setSubject(id);
+      writeHash(id);
+    }
 
     // "/" focuses search, Escape clears it.
     useEffect(function () {
@@ -319,8 +378,8 @@ Press <kbd>/</kbd> to search.</p>
     }, []);
 
     var results = useMemo(function () {
-      return window.filterEntries(entries, query, type);
-    }, [query, type]);
+      return window.filterEntries(entries, query, type, subject);
+    }, [query, type, subject]);
 
     var groups = useMemo(function () {
       return window.groupBySubject(results);
@@ -335,6 +394,14 @@ Press <kbd>/</kbd> to search.</p>
       { id: "deck", label: "Anki decks" },
     ];
 
+    var subjectChips = [{ id: "all", label: "All subjects" }].concat(
+      subjects.map(function (s) { return { id: s, label: s }; })
+    );
+
+    var nothing = query
+      ? html`Nothing matches <strong>${query}</strong>.`
+      : html`Nothing here with those filters.`;
+
     return html`
       <div>
         <div class="controls">
@@ -346,6 +413,16 @@ Press <kbd>/</kbd> to search.</p>
             value=${query}
             aria-label="Search lessons and reference cards"
             onInput=${function (ev) { setQuery(ev.target.value); }} />
+          <div class="chips subjects">
+            ${subjectChips.map(function (c) {
+              return html`
+                <button
+                  key=${c.id}
+                  class="chip subj"
+                  aria-pressed=${subject === c.id}
+                  onClick=${function () { chooseSubject(c.id); }}>${c.label}</button>`;
+            })}
+          </div>
           <div class="chips">
             ${chips.map(function (c) {
               return html`
@@ -360,7 +437,7 @@ Press <kbd>/</kbd> to search.</p>
         </div>
 
         ${results.length === 0
-          ? html`<div class="empty">Nothing matches <strong>${query}</strong>.</div>`
+          ? html`<div class="empty">${nothing}</div>`
           : groups.map(function (g) {
               return html`
                 <section key=${g.subject}>

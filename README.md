@@ -40,9 +40,16 @@ Give it `learn:*` meta tags in the `<head>` so the index picks it up:
 <meta name="learn:tags"    content="monoid, product notation">
 ```
 
-`status` is `current`, or `ahead-of-sequence` for a card whose lesson has not
-been written yet. The index badges those so they do not look like the next
-thing to read.
+`status` is one of three values. The index badges the last two.
+
+| `status` | Meaning | On the index |
+|---|---|---|
+| `current` | The normal case | No badge |
+| `ahead-of-sequence` | A card whose lesson is not written yet | Badge, so it does not look like the next thing to read |
+| `start-here` | The entry point for a subject | Badge, so a newcomer knows which page to open first |
+
+Give `start-here` to one page per subject, and give it the lowest `order` so it
+sorts to the top of that subject.
 
 Then run the checks, which rebuild the index first:
 
@@ -71,3 +78,14 @@ Open `index.html` directly, or serve the folder:
 ```sh
 python3 -m http.server 8000
 ```
+
+The index filters by subject and by type. The subject is kept in the URL, so a
+link can open the page already filtered. Send someone the subject they want:
+
+```
+https://mightymoose.github.io/Learn/#excel
+https://mightymoose.github.io/Learn/#algebra
+```
+
+The match is case-insensitive, and an unknown name falls back to showing
+everything rather than showing nothing.

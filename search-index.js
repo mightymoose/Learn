@@ -100,7 +100,7 @@ window.LEARN_INDEX = [
     "source": "Microsoft, Excel help and learning",
     "section": "Tier 0 · Start here",
     "order": "0.00",
-    "status": "current",
+    "status": "start-here",
     "kicker": "Start here · Excel",
     "summary": "Twenty lessons in four tiers, beginner to expert. Tier 1 is written. Open this page first, then work down.",
     "tags": [

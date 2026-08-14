@@ -57,6 +57,29 @@ check("matches the source field",
 check("no match returns empty",
   filterEntries(entries, "zzzznotathing", "all").length === 0);
 
+console.log("\nSubject filter:");
+const allSubjects = [...new Set(entries.map((e) => e.subject))];
+check("more than one subject to filter", allSubjects.length >= 2, allSubjects.join(", "));
+allSubjects.forEach((s) => {
+  const only = filterEntries(entries, "", "all", s);
+  check("only " + s + " comes back",
+    only.length >= 1 && only.every((e) => e.subject === s), only.length);
+});
+check("the subjects partition the index",
+  allSubjects.reduce((n, s) => n + filterEntries(entries, "", "all", s).length, 0) === entries.length);
+check("\"all\" is the same as no subject filter",
+  filterEntries(entries, "", "all", "all").length === entries.length);
+check("omitting the argument returns everything",
+  filterEntries(entries, "", "all").length === entries.length);
+check("an unknown subject returns nothing",
+  filterEntries(entries, "", "all", "Nosuchsubject").length === 0);
+check("subject combines with a query",
+  filterEntries(entries, "monoid", "all", "Algebra").length ===
+    filterEntries(entries, "monoid", "all").length);
+check("subject combines with a type",
+  filterEntries(entries, "", "lesson", allSubjects[0])
+    .every((e) => e.type === "lesson" && e.subject === allSubjects[0]));
+
 console.log("\nMulti-term is AND, not OR:");
 const both = filterEntries(entries, "monoid powers", "all");
 const justPowers = filterEntries(entries, "powers", "all");
