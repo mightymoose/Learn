@@ -1,2 +1,5 @@
 # Source material (PDFs, scans, textbooks). Keep local, do not commit.
 sources/
+
+# Claude Code local state, including git worktrees checked out under here.
+.claude/
