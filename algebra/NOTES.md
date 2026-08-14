@@ -51,6 +51,29 @@ to a plain `ls`. Use `command ls` to see it.
 - Mission is mastery, not coverage. Favour retrieval practice and spacing over
   moving through more of the book.
 
+## Route through the book
+
+Sequential, from Chapter I, §1. See [MISSION.md](./MISSION.md) and learning record 0002.
+Chapter I sections and their starting pages, from the contents on p. xi:
+
+| § | Title | Page | Lesson |
+|---|---|---|---|
+| 1 | Monoids | 3 | 0001 |
+| 2 | Groups | 7 | next |
+| 3 | Normal subgroups | 13 | |
+| 4 | Cyclic groups | 23 | |
+| 5 | Operations of a group on a set | 25 | |
+| 6 | Sylow subgroups | 33 | |
+| 7 | Direct sums and free abelian groups | 36 | |
+| 8 | Finitely generated abelian groups | 42 | |
+| 9 | The dual group | 46 | |
+| 10 | Inverse limit and completion | 49 | |
+| 11 | Categories and functors | 53 | card written |
+| 12 | Free groups | 66 | |
+
+A section below Ryan's floor still gets a lesson. The lesson covers what Lang does there
+that a first course does not, never the first-course definition.
+
 ## Lesson conventions
 
 - Every lesson links `assets/lesson.css` and `assets/quiz.js`. Do not inline styles or

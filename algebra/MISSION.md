@@ -17,12 +17,26 @@ using Lang's *Algebra* as the source text.
   correspondence) from memory, not from rereading.
 - Say what a paper's main theorem asserts, in plain language, after one pass.
 
+## Route
+
+**Sequential through Lang, starting at Chapter I, §1.** Cover every section in the
+book's own order. Complete mastery means complete, so the lessons do not skip ahead to
+whatever is most useful.
+
+Ryan's floor is solid undergraduate algebra, so a lesson on an early section does not
+reteach the definitions. It teaches what Lang does there that a first course does not.
+Section 1 is a worked example. The monoid definition takes four lines, and the remaining
+four pages build the product notation that the rest of the book runs on.
+
+Pace follows the material, not the section numbers. Familiar sections get one lesson.
+Sections like §10 on inverse limits and §11 on categories get as many as they need.
+
 ## Constraints
 
 - Source text is a 934-page scan with no text layer. Every citation is checked against
   a rendered page, never from memory. See [NOTES.md](./NOTES.md) for the page offset.
 - Starting floor: undergraduate algebra, mostly solid. Groups, quotients, and rings are
-  familiar. Lessons start where Lang gets sharper than a first course.
+  familiar.
 - No deadline. This is mastery work, so lessons favour long-term retention over
   coverage speed.
 
@@ -31,5 +45,5 @@ using Lang's *Algebra* as the source text.
 - Exam-style speed drills. There is no qualifying exam driving this.
 - Algebraic geometry and homotopy theory as subjects in their own right. They are
   downstream of the mission, not part of it.
-- Reteaching first-course material that the floor above already covers, unless a
-  lesson exposes a real gap.
+- Reteaching definitions the floor already covers. Cover the section, not the
+  first-course version of it.

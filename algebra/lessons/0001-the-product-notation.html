@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 01 &middot; The Product Notation</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Lesson 01 &middot; Lang, Chapter I, &sect;1, pp. 3&ndash;7</p>
+  <h1>The product notation</h1>
+  <p class="standfirst">You already know what a monoid is. This is about the machinery
+  Lang builds on top of it, which the next 900 pages assume.</p>
+</header>
+
+<div class="win">
+  <p class="kicker">After this lesson</p>
+  <p>You can say exactly what
+  <span class="m up">&prod;</span><sub class="m">i&isin;I</sub>&thinsp;<span class="m">f(i)</span>
+  means in Lang, name the two theorems that make it well defined, and say why
+  <span class="m">x</span><sup>0</sup> = <span class="m">e</span> is forced rather than
+  chosen.</p>
+</div>
+
+<h2>Why &sect;1 is not really about monoids</h2>
+
+<p>Lang defines a monoid on p. 3 in four lines. A set with an associative law of
+composition and a unit element. You met that years ago. If &sect;1 were about monoids it
+would end there.</p>
+
+<p>It runs to p. 7. The rest builds one thing: a product symbol that works over an
+arbitrary index set. Direct sums in &sect;7, polynomials in Chapter II, and every
+coordinate-wise argument in the book run on it. Lang states its rules once, here, and
+never restates them.</p>
+
+<p>So read &sect;1 for the notation, not for the definition.</p>
+
+<h2>Three moves, in order</h2>
+
+<h3>1. The n-fold product is defined, not assumed</h3>
+
+<p>Lang defines the product of <span class="m">x</span><sub>1</sub>, &hellip;,
+<span class="m">x<sub>n</sub></span> by induction, on p. 4. Each new factor attaches on
+the right.</p>
+
+<p class="display"><span class="m up">&prod;</span><sub class="m">&nu;=1</sub><sup class="m">n</sup>
+<span class="m">x<sub>&nu;</sub></span> = (<span class="m">x</span><sub>1</sub> &middot;&middot;&middot;
+<span class="m">x</span><sub><span class="m">n</span>&minus;1</sub>)<span class="m">x<sub>n</sub></span></p>
+
+<p>That single expression is one particular way to bracket the factors. Associativity as
+stated in the definition of a monoid only moves brackets among three elements. It does not
+say the other bracketings of <span class="m">n</span> factors agree. Lang closes the gap
+with a rule on p. 4.</p>
+
+<p class="display"><span class="m up">&prod;</span><sub class="m">&mu;=1</sub><sup class="m">m</sup>
+<span class="m">x<sub>&mu;</sub></span> &middot;
+<span class="m up">&prod;</span><sub class="m">&nu;=1</sub><sup class="m">n</sup>
+<span class="m">x</span><sub><span class="m">m</span>+<span class="m">&nu;</span></sub> =
+<span class="m up">&prod;</span><sub class="m">&nu;=1</sub><sup class="m">m+n</sup>
+<span class="m">x<sub>&nu;</sub></span></p>
+
+<p>He says this rule lets you insert parentheses any way you like, then leaves the proof
+as an exercise. It is an easy induction on <span class="m">n</span>. Do it once and the
+word &ldquo;obviously&rdquo; stops appearing in your own proofs at this level.</p>
+
+<h3>2. The empty product is the unit element</h3>
+
+<p>Lang sets the product of no factors equal to <span class="m">e</span>, on p. 4. This
+looks like bookkeeping. It is doing real work.</p>
+
+<p>On p. 6 he defines powers by
+<span class="m">x</span><sup class="m">n</sup> =
+<span class="m up">&prod;</span><sub>1</sub><sup class="m">n</sup>&thinsp;<span class="m">x</span>,
+for every integer <span class="m">n</span> &ge; 0. Feed in
+<span class="m">n</span> = 0 and you get <span class="m">x</span><sup>0</sup> =
+<span class="m">e</span> with no separate stipulation. The convention on p. 4 already
+decided it.</p>
+
+<div class="callout">
+  <p class="kicker">The habit worth copying</p>
+  <p>A convention that removes a special case is usually the right convention. Lang picks
+  the empty product so that <span class="m">x</span><sup class="m">n+m</sup> =
+  <span class="m">x</span><sup class="m">n</sup><span class="m">x</span><sup class="m">m</sup>
+  holds at <span class="m">n</span> = 0 without a side condition. Watch for the same move
+  with empty sums, empty direct sums, and the zero module.</p>
+</div>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">Why does Lang get <span class="m">x</span><sup>0</sup> =
+  <span class="m">e</span> without stating it as a separate rule?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true"
+        data-why="Correct. He fixes the empty product as e on p. 4, and the power definition on p. 6 just reads that case off.">The empty product already equals the unit</button></li>
+    <li><button class="opt" data-correct="false"
+        data-why="It does not follow from the axioms. A monoid says nothing about the symbol x to the zero until a product of no factors is given a value.">The monoid axioms force this one value</button></li>
+    <li><button class="opt" data-correct="false"
+        data-why="The exponent rule is a consequence here, not the source. Lang derives it after the definition, and it needs the n = 0 case to already be settled.">The exponent rule requires this one value</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h3>3. The index set need not be ordered, or finite</h3>
+
+<p>This is the payoff of &sect;1, on p. 5. Let <span class="m">G</span> be a
+<em>commutative</em> monoid, let <span class="m">I</span> be any set, and let
+<span class="m">f</span>&thinsp;:&thinsp;<span class="m">I &rarr; G</span> be a map with
+<span class="m">f(i)</span> = <span class="m">e</span> for <strong>almost all</strong>
+<span class="m">i</span>. Lang fixes that phrase on the same page to mean all but a finite
+number.</p>
+
+<p>Write <span class="m">I</span><sub>0</sub> for the set of
+<span class="m">i</span> with <span class="m">f(i)</span> &ne; <span class="m">e</span>.
+Then <span class="m">I</span><sub>0</sub> is finite, and Lang defines</p>
+
+<p class="display"><span class="m up">&prod;</span><sub class="m">i&isin;I</sub>
+<span class="m">f(i)</span> =
+<span class="m up">&prod;</span><sub class="m">i&isin;I<sub>0</sub></sub>
+<span class="m">f(i)</span></p>
+
+<svg class="diagram" viewBox="0 0 360 150" width="360" role="img"
+     aria-label="A large set I of index points, with a small finite subset I-zero where f is not the unit.">
+  <rect x="10" y="14" width="340" height="112" rx="6"
+        style="fill:none;stroke:var(--rule);stroke-width:1"/>
+  <text class="cap" x="24" y="34" text-anchor="start">I</text>
+
+  <circle cx="86" cy="74" r="34" style="fill:none;stroke:var(--ink);stroke-width:1.1"/>
+  <text class="cap" x="86" y="126" text-anchor="middle">I&#8320; is finite</text>
+
+  <circle cx="70"  cy="64" r="4" style="fill:var(--ink);stroke:none"/>
+  <circle cx="96"  cy="60" r="4" style="fill:var(--ink);stroke:none"/>
+  <circle cx="78"  cy="88" r="4" style="fill:var(--ink);stroke:none"/>
+  <circle cx="102" cy="84" r="4" style="fill:var(--ink);stroke:none"/>
+
+  <circle cx="170" cy="44" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+  <circle cx="212" cy="92" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+  <circle cx="252" cy="40" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+  <circle cx="196" cy="62" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+  <circle cx="292" cy="76" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+  <circle cx="318" cy="46" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+  <circle cx="240" cy="104" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+  <circle cx="326" cy="100" r="3.4" style="fill:none;stroke:var(--ink-faint)"/>
+
+  <text class="cap" x="248" y="126" text-anchor="middle">hollow points contribute e</text>
+</svg>
+<p class="figcap">Only the filled points do anything. There may be infinitely many hollow
+ones, and the product is still a finite product.</p>
+
+<p>Two facts have to hold before that definition is legal. First,
+<span class="m">I</span><sub>0</sub> is finite, so the right side is a product of finitely
+many factors. Second, <span class="m">I</span><sub>0</sub> carries no order, so the value
+must not depend on the order you choose. Lang proves that second fact on p. 5 for
+commutative monoids, by induction, and this is the one proof in &sect;1 he writes out in
+full rather than leaving as an exercise.</p>
+
+<div class="callout">
+  <p class="kicker">Note the hypothesis</p>
+  <p>Order independence needs commutativity. Lang states the reordering theorem for a
+  commutative monoid, and the index-set product inherits that hypothesis. This is why
+  <span class="m up">&prod;</span><sub class="m">i&isin;I</sub> appears in Lang for abelian
+  groups and modules, and why non-commutative arguments keep an explicit ordering.</p>
+</div>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">Which condition makes
+  <span class="m up">&prod;</span><sub class="m">i&isin;I</sub><span class="m">f(i)</span>
+  legal when <span class="m">I</span> is infinite?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true"
+        data-why="Correct. That is Lang's almost all, fixed on p. 5. The product collapses to a finite one over I-zero.">All but finitely many indices give e</button></li>
+    <li><button class="opt" data-correct="false"
+        data-why="Lang defines no limit here. Chapter I has no topology on G, and the product is finite by construction, not by convergence.">The partial products converge to a limit</button></li>
+    <li><button class="opt" data-correct="false"
+        data-why="A well ordering would fix an order, but it would not make an infinite product meaningful. Finiteness is what does the work.">The index set carries a fixed ordering</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>Rebuild Lang's proof</h2>
+
+<p>The reordering theorem on p. 5 says this. If <span class="m">G</span> is commutative and
+<span class="m">&psi;</span> permutes (1, &hellip;, <span class="m">n</span>), then
+reordering the factors by <span class="m">&psi;</span> leaves the product unchanged. Here
+is his argument, in four moves.</p>
+
+<div class="drill" data-drill="order">
+  <p class="drill-q">Put the four moves in Lang's order.</p>
+  <ul class="seq">
+    <li><button class="opt" data-pos="3">Commute that factor to the far right end</button></li>
+    <li><button class="opt" data-pos="1">Settle n = 1, then assume the case n&minus;1</button></li>
+    <li><button class="opt" data-pos="4">Reindex the rest and apply the assumption</button></li>
+    <li><button class="opt" data-pos="2">Find k where &psi; sends k to the value n</button></li>
+  </ul>
+  <p class="feedback"></p>
+  <button class="drill-reset">Reset</button>
+</div>
+
+<p>Step 4 is the one worth remembering. Lang builds an explicit map
+<span class="m">&phi;</span> on (1, &hellip;, <span class="m">n</span>&minus;1) that skips
+over <span class="m">k</span>. That is what turns a permutation of
+<span class="m">n</span> things into a permutation of <span class="m">n</span>&minus;1
+things, so the induction hypothesis applies. Reindexing to fit an induction hypothesis is a
+move you will use for the rest of the book.</p>
+
+<h2>The rest of &sect;1, in one pass</h2>
+
+<p>Lang closes the section with material you can read quickly. He states a Fubini rule for
+double products on p. 6 and leaves it as an exercise. He defines products of
+<em>subsets</em> <span class="m">SS&prime;</span> and notes
+<span class="m">GG</span> = <span class="m">G</span>. He defines a
+<strong>submonoid</strong> as a subset that contains <span class="m">e</span> and is closed
+under the law of composition.</p>
+
+<p>Two examples there are worth marking. The multiplicative subsets of a commutative ring
+are monoids, which is the definition localization will need in Chapter II, &sect;4. And the
+connected sum of compact surfaces makes a monoid, which is Lang showing you the notion is
+not confined to algebra.</p>
+
+<h2>Before the next lesson</h2>
+
+<p>Do not reread this page. In two days, answer from memory.</p>
+
+<ol>
+  <li>State the definition of
+    <span class="m up">&prod;</span><sub class="m">i&isin;I</sub><span class="m">f(i)</span>,
+    including every hypothesis.</li>
+  <li>Name the two facts that make it well defined, and say which one needs commutativity.</li>
+  <li>Prove the general associativity rule on p. 4 by induction. Lang left it to you.</li>
+  <li>Give a monoid that is not a group, and a submonoid of it that is not a group.</li>
+</ol>
+
+<div class="callout">
+  <p class="kicker">Read this next</p>
+  <p>Lang, &sect;1, pp. 3&ndash;7, in full. It is five pages and you now know what to look
+  for. Do the associativity exercise on p. 4 with a pen. Then start &sect;2, Groups, on
+  p. 7, which is the next lesson.</p>
+</div>
+
+<div class="ask">
+  <p><strong>Ask your teacher.</strong> If any step above did not land, say so in chat.
+  Good questions here: why associativity for three elements does not immediately give it
+  for <span class="m">n</span>, where commutativity is genuinely needed, or what breaks in
+  Chapter III if the empty product is left undefined.</p>
+</div>
+
+<div class="footer">
+  <h3>References</h3>
+  <p>Lang, <em>Algebra</em>, revised 3rd edition, Springer GTM 211, 2002.
+  Chapter I, &sect;1, pp. 3&ndash;7. Local copy in <code>sources/</code>.</p>
+  <p class="nav">
+    <a href="../reference/product-notation.html">Reference card</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+    <a href="../MISSION.md">Mission</a>
+    <a href="../RESOURCES.md">Resources</a>
+  </p>
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

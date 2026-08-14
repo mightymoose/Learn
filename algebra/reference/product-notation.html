@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference &middot; Product Notation</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Reference card &middot; Lang, Chapter I, &sect;1</p>
+  <h1>Product notation</h1>
+  <p class="standfirst">One page. Print it. Every entry checked against Lang, pp. 3&ndash;7.</p>
+</header>
+
+<h2>Definitions</h2>
+
+<table>
+  <thead>
+    <tr><th>Term</th><th>Meaning in Lang</th><th>Page</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Law of composition</td>
+      <td>A map <span class="m">S &times; S &rarr; S</span>. Its value on
+          <span class="m">(x, y)</span> is the product <span class="m">xy</span>.</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Monoid</td>
+      <td>A set with an associative law of composition and a unit element. Never empty,
+          since it contains <span class="m">e</span>.</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Submonoid</td>
+      <td>A subset containing <span class="m">e</span> and closed under the law of
+          composition.</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Almost all</td>
+      <td>All but a finite number. Lang fixes this phrase here and uses it for the whole
+          book.</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Commutative, abelian</td>
+      <td>Two names for the same condition on the law of composition.</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>The product symbol</h2>
+
+<table>
+  <thead>
+    <tr><th>Rule</th><th>Statement</th><th>Status in Lang</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Definition</td>
+      <td><span class="m up">&prod;</span><sub class="m">&nu;=1</sub><sup class="m">n</sup><span class="m">x<sub>&nu;</sub></span>
+          = (<span class="m">x</span><sub>1</sub> &middot;&middot;&middot; <span class="m">x</span><sub><span class="m">n</span>&minus;1</sub>)<span class="m">x<sub>n</sub></span>,
+          by induction on <span class="m">n</span>.</td>
+      <td>defined, p. 4</td>
+    </tr>
+    <tr>
+      <td>General associativity</td>
+      <td>Splitting a product at any point and multiplying the halves gives the same value.
+          Brackets may go anywhere.</td>
+      <td>exercise, p. 4</td>
+    </tr>
+    <tr>
+      <td>Empty product</td>
+      <td><span class="m up">&prod;</span><sub class="m">&nu;=1</sub><sup>0</sup><span class="m">x<sub>&nu;</sub></span>
+          = <span class="m">e</span>.</td>
+      <td>convention, p. 4</td>
+    </tr>
+    <tr>
+      <td>Reordering</td>
+      <td>For a commutative monoid and any permutation <span class="m">&psi;</span> of
+          (1, &hellip;, <span class="m">n</span>), reordering the factors leaves the value
+          unchanged.</td>
+      <td>proved, p. 5</td>
+    </tr>
+    <tr>
+      <td>Index set</td>
+      <td><span class="m up">&prod;</span><sub class="m">i&isin;I</sub><span class="m">f(i)</span>
+          means the product over
+          <span class="m">I</span><sub>0</sub> = {<span class="m">i</span> :
+          <span class="m">f(i)</span> &ne; <span class="m">e</span>}, which must be finite.
+          Needs <span class="m">G</span> commutative.</td>
+      <td>defined, p. 5</td>
+    </tr>
+    <tr>
+      <td>Double products</td>
+      <td>The two iterated products over <span class="m">I</span> and
+          <span class="m">J</span> agree.</td>
+      <td>exercise, p. 6</td>
+    </tr>
+    <tr>
+      <td>Additive notation</td>
+      <td>Write <span class="m up">&sum;</span> for
+          <span class="m up">&prod;</span>, and 0 for <span class="m">e</span>. Reserved
+          for the commutative case.</td>
+      <td>p. 3, p. 5</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <p class="kicker">Two hypotheses that travel together</p>
+  <p>An index-set product needs <em>almost all factors equal to</em>
+  <span class="m">e</span>, so the product is finite, and it needs
+  <span class="m">G</span> <em>commutative</em>, so the order does not matter. Drop either
+  and the symbol stops meaning anything. This pairing reappears at direct sums in
+  &sect;7.</p>
+</div>
+
+<h2>Powers</h2>
+
+<table>
+  <thead>
+    <tr><th>Rule</th><th>Condition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="m">x</span><sup class="m">n</sup> =
+        <span class="m up">&prod;</span><sub>1</sub><sup class="m">n</sup><span class="m">x</span>,
+        for <span class="m">n</span> &ge; 0</td><td>any monoid</td></tr>
+    <tr><td><span class="m">x</span><sup>0</sup> = <span class="m">e</span></td>
+        <td>follows from the empty product</td></tr>
+    <tr><td><span class="m">x</span><sup class="m">n+m</sup> =
+        <span class="m">x</span><sup class="m">n</sup><span class="m">x</span><sup class="m">m</sup>,
+        and (<span class="m">x</span><sup class="m">n</sup>)<sup class="m">m</sup> =
+        <span class="m">x</span><sup class="m">nm</sup></td><td>any monoid</td></tr>
+    <tr><td>(<span class="m">xy</span>)<sup class="m">n</sup> =
+        <span class="m">x</span><sup class="m">n</sup><span class="m">y</span><sup class="m">n</sup></td>
+        <td>only when <span class="m">xy</span> = <span class="m">yx</span></td></tr>
+  </tbody>
+</table>
+
+<h2>Subsets</h2>
+
+<p>For subsets <span class="m">S</span>, <span class="m">S&prime;</span> of a monoid
+<span class="m">G</span>, Lang writes <span class="m">SS&prime;</span> for the set of all
+products <span class="m">xy</span> with <span class="m">x &isin; S</span> and
+<span class="m">y &isin; S&prime;</span> (p. 6). This is associative, and
+<span class="m">GG</span> = <span class="m">G</span> because
+<span class="m">G</span> has a unit. Write <span class="m">xS</span> for
+{<span class="m">x</span>}<span class="m">S</span>.</p>
+
+<h2>Examples Lang gives</h2>
+
+<table>
+  <thead>
+    <tr><th>Example</th><th>Why it is listed</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Integers &ge; 0 under addition</td><td>The basic additive monoid.</td></tr>
+    <tr><td>Powers of a fixed <span class="m">x</span></td><td>A submonoid of any monoid.</td></tr>
+    <tr><td>Multiplicative subsets of a commutative ring</td>
+        <td>The input localization needs later, in Chapter II, &sect;4.</td></tr>
+    <tr><td>Connected sum of compact surfaces</td>
+        <td>Shows the notion is not confined to algebra.</td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  <p>Source: Lang, <em>Algebra</em>, revised 3rd edition, Springer GTM 211, 2002,
+  Chapter I, &sect;1, pp. 3&ndash;7.</p>
+  <p class="nav">
+    <a href="../lessons/0001-the-product-notation.html">Lesson 01</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+    <a href="../RESOURCES.md">Resources</a>
+  </p>
+</div>
+
+</body>
+</html>
