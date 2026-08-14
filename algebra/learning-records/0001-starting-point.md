@@ -4,10 +4,11 @@ Ryan states that his undergraduate algebra is mostly solid. Groups, quotients, a
 are familiar. His goal is complete mastery, measured by being able to read modern algebra
 papers on arXiv.
 
-This sets the floor. Lessons skip first-course construction work and start where Lang gets
-sharper than a first course. It also picks the thread: papers assume the reader owns the
-standard constructions and their universal properties, so the category-theoretic layer in
-Lang's Chapter I, §11 comes before anything in Chapters II or III.
+This sets the floor. A lesson does not reteach a definition Ryan already owns. It teaches
+what Lang does in a section that a first course does not.
+
+The floor and the goal in this record are still current. The route conclusions it
+originally drew are not. See [[0002-sequential-route-through-lang]].
 
 ## Evidence
 
@@ -17,6 +18,9 @@ in reading quantifiers over morphisms, not in algebra content.
 
 ## Implications
 
-- Skip Lang I, §§1–4. Reteach only if a gap surfaces.
-- Chapter I, §11 is the entry point, not Chapter I, §1.
 - Lesson pacing favours retrieval and spacing over coverage. There is no deadline.
+- Pitch every lesson above the first-course version of its section.
+
+The two route implications this record first carried, that §§1–4 should be skipped and
+that §11 was the entry point, are superseded by
+[[0002-sequential-route-through-lang]]. The route is sequential from §1.

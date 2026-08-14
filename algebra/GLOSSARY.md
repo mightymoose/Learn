@@ -8,14 +8,18 @@ it. The glossary records compressed knowledge. It is not a dictionary to read ah
 
 ## Terms
 
-_No terms yet._ Lesson 01 introduces universal object, universally attracting, and
-universally repelling. They get promoted here once Ryan applies them to a construction
-the lesson did not cover.
+_No terms yet._
+
+Pending from lesson 01 (Lang I, §1): law of composition, monoid, submonoid, almost all.
+They get promoted once Ryan uses them correctly on something the lesson did not cover.
 
 ## Ambiguities to resolve on entry
 
+- **almost all** means all but a finite number. Lang fixes this on p. 5 and relies on it
+  for the rest of the book. It never means "nearly every" in a measure-theoretic sense.
+- **commutative / abelian** are the same condition in Lang (p. 4). Pick one name on entry
+  and list the other as an alias to avoid.
+- **product** is overloaded. In §1 it is the value of a law of composition. In §11 it is a
+  universal object. Any entry must say which is meant.
 - **attracting / terminal** and **repelling / initial** name the same two ideas. Lang uses
-  the first pair. Most modern papers use the second. Pick Lang's for this workspace and
-  list the others as aliases to avoid.
-- **universal** on its own is Lang's shorthand for either direction (p. 58). Any entry
-  must say which direction is meant.
+  the first pair, most modern papers the second. Resolve when the route reaches §11.

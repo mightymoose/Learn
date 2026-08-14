@@ -19,17 +19,9 @@ using Lang's *Algebra* as the source text.
 
 ## Route
 
-**Sequential through Lang, starting at Chapter I, §1.** Cover every section in the
-book's own order. Complete mastery means complete, so the lessons do not skip ahead to
-whatever is most useful.
-
-Ryan's floor is solid undergraduate algebra, so a lesson on an early section does not
-reteach the definitions. It teaches what Lang does there that a first course does not.
-Section 1 is a worked example. The monoid definition takes four lines, and the remaining
-four pages build the product notation that the rest of the book runs on.
-
-Pace follows the material, not the section numbers. Familiar sections get one lesson.
-Sections like §10 on inverse limits and §11 on categories get as many as they need.
+Sequential through Lang, from Chapter I, §1, covering every section in the book's order.
+A lesson never reteaches the first-course version of a section. Section map in
+[NOTES.md](./NOTES.md), reasoning in learning record 0002.
 
 ## Constraints
 
