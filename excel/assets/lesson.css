@@ -296,6 +296,8 @@ table.grid .sel { outline: 2px solid var(--accent); outline-offset: -2px; }
 table.grid .formula { color: var(--accent); }
 table.grid .head td,
 table.grid .head th:not(.rownum) { font-weight: 600; color: var(--ink); }
+/* .plain opts a cell out of .head bolding, for a value that sits on a header row */
+table.grid .head td.plain { font-weight: 400; }
 
 .gridcap {
   max-width: var(--wide);

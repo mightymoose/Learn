@@ -53,11 +53,11 @@ then condition pairs.</p>
     <tr><th>Question</th><th>Formula</th></tr>
   </thead>
   <tbody>
-    <tr><td>Total for one region</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H4)</span></td></tr>
-    <tr><td>How many rows match</td><td><span class="fx">=COUNTIFS(Sales[Region], H4)</span></td></tr>
-    <tr><td>Average of matching rows</td><td><span class="fx">=AVERAGEIFS(Sales[Revenue], Sales[Region], H4)</span></td></tr>
-    <tr><td>Largest matching value</td><td><span class="fx">=MAXIFS(Sales[Revenue], Sales[Region], H4)</span></td></tr>
-    <tr><td>Two conditions at once</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H4, Sales[Price], 4.5)</span></td></tr>
+    <tr><td>Total for one region</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
+    <tr><td>How many rows match</td><td><span class="fx">=COUNTIFS(Sales[Region], H11)</span></td></tr>
+    <tr><td>Average of matching rows</td><td><span class="fx">=AVERAGEIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
+    <tr><td>Largest matching value</td><td><span class="fx">=MAXIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
+    <tr><td>Two conditions at once</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H11, Sales[Price], 4.5)</span></td></tr>
   </tbody>
 </table>
 
@@ -80,10 +80,10 @@ condition pairs. Every other function in the family takes its range first.</p>
     <tr><th>Condition</th><th>Matches</th></tr>
   </thead>
   <tbody>
-    <tr><td><span class="fx">H4</span></td><td>Whatever that cell holds. The preferred form</td></tr>
+    <tr><td><span class="fx">H11</span></td><td>Whatever that cell holds. The preferred form</td></tr>
     <tr><td><span class="fx">"North"</span></td><td>Exactly North. Case is ignored</td></tr>
     <tr><td><span class="fx">"&gt;500"</span></td><td>Greater than 500</td></tr>
-    <tr><td><span class="fx">"&gt;="&amp;H4</span></td><td>At least the value in H4. Note the ampersand</td></tr>
+    <tr><td><span class="fx">"&gt;="&amp;H11</span></td><td>At least the value in H11. Note the ampersand</td></tr>
     <tr><td><span class="fx">"&lt;&gt;North"</span></td><td>Anything except North</td></tr>
     <tr><td><span class="fx">"N*"</span></td><td>Starts with N. The star means any characters</td></tr>
     <tr><td><span class="fx">"?????"</span></td><td>Exactly five characters. Each mark is one character</td></tr>
@@ -92,8 +92,8 @@ condition pairs. Every other function in the family takes its range first.</p>
 </table>
 
 <p>The ampersand form is the one people get wrong. A comparison built from a cell has to
-be glued together as text, so it is <span class="fx">"&gt;="&amp;H4</span> and never
-<span class="fx">"&gt;=H4"</span>, which looks for the literal characters.</p>
+be glued together as text, so it is <span class="fx">"&gt;="&amp;H11</span> and never
+<span class="fx">"&gt;=H11"</span>, which looks for the literal characters.</p>
 
 <h2>When a total comes out zero</h2>
 
@@ -114,7 +114,7 @@ be glued together as text, so it is <span class="fx">"&gt;="&amp;H4</span> and n
 
 <p>Put this in a spare cell beside any summary block. It should read zero forever.</p>
 
-<p class="fx fx-block">=SUM(I4:I6)-SUM(Sales[Revenue])</p>
+<p class="fx fx-block">=SUM(I11:I13)-SUM(Sales[Revenue])</p>
 
 <p>If the parts stop adding up to the whole, a category is missing or misspelled. A
 summary that cannot be checked is a summary nobody should trust, yours included.</p>

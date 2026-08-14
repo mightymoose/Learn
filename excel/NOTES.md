@@ -40,6 +40,16 @@ Windows. Tier 4 changes shape if Carla is on a Mac.
 - Sample data stays the same across lessons where possible. A learner who already knows
   the data spends working memory on the skill instead of the scenario. Tier 1 uses one
   small table of regional sales.
+- **The tier 1 workbook layout is load-bearing. Do not move cells without checking
+  lesson 3.** The data block is A1:F7. Column G is empty on purpose. The commission rate
+  sits in H1 and I1, and the lesson 4 summary block starts at row 10.
+
+  `Ctrl` `T` sizes a Table from the current region, which spreads out from the selected
+  cell until it meets a fully blank row and a fully blank column. Put anything in column
+  G and lesson 3 breaks: Excel proposes A1:H7, Carla gets a Table two columns too wide
+  with 0.08 as a header, and the `$I$1` in her commission formula lands inside the
+  Table's own header row. Lesson 2 states the gap, and lesson 3 tells her to check the
+  proposed range reads `$A$1:$F$7`.
 - Every function named in a lesson links to its Microsoft page on first use.
 
 ## Drill rules the check suite enforces

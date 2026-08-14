@@ -48,6 +48,15 @@ keystroke.</p>
 whether your table has headers. It does, so leave that ticked, and press
 <span class="kbd">Enter</span>.</p>
 
+<p><strong>Read the range in that box before you press Enter.</strong> It should say
+<span class="fx">$A$1:$F$7</span>. Excel guessed that range by starting at your cell and
+spreading outwards until it hit a fully blank row and a fully blank column. That is the
+whole reason lesson 2 told you to leave column G empty. Without the gap, Excel would have
+carried on through your commission rate and built a Table two columns too wide, with 0.08
+sitting in a header.</p>
+
+<p>If the range is wrong, press Escape and look for whatever is touching your data.</p>
+
 <p>The block gains banded colours and little filter arrows in the header row. That
 cosmetic change is not the point. The point is that Excel now treats those cells as one
 named object rather than as a coincidence of adjacent cells.</p>
@@ -160,7 +169,8 @@ rarely what you want inside a Table, but it surprises people once.</p>
 
 <div class="step">
   <p>Click inside your data and press <span class="kbd">Ctrl</span>
-  <span class="kbd">T</span>. Confirm the headers box is ticked.</p>
+  <span class="kbd">T</span>. Confirm the headers box is ticked, and confirm the range
+  reads <span class="fx">$A$1:$F$7</span> and not something wider.</p>
 </div>
 <div class="step">
   <p>On the <em>Table Design</em> tab, rename it from Table1 to
@@ -169,6 +179,11 @@ rarely what you want inside a Table, but it surprises people once.</p>
 <div class="step">
   <p>Replace the Revenue formula with <span class="fx">=[@Units]*[@Price]</span>. Watch
   the whole column fill at once.</p>
+</div>
+<div class="step">
+  <p>Do the same to Commission, with <span class="fx">=[@Revenue]*$I$1</span>. The rate
+  keeps its dollar signs, because it lives outside the Table and structured references
+  cannot reach it.</p>
 </div>
 <div class="step">
   <p>Tick <em>Total Row</em>, and set the Revenue total to Sum. You should see 3427.50.</p>

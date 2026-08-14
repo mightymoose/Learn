@@ -91,12 +91,12 @@ North's revenue at the higher price only, add a second condition.</p>
 mistake from <a href="0001-formulas-not-numbers.html">lesson 1</a> wearing a different
 hat. To ask about South you would have to edit the formula.</p>
 
-<p>Put the region name in its own cell instead. If <span class="fx">H4</span> holds the
+<p>Put the region name in its own cell instead. If <span class="fx">H11</span> holds the
 word North, the formula becomes this.</p>
 
-<p class="fx fx-block">=SUMIFS(Sales[Revenue], Sales[Region], H4)</p>
+<p class="fx fx-block">=SUMIFS(Sales[Revenue], Sales[Region], H11)</p>
 
-<p>Now change H4 to South and the answer follows. Better still, write the three region
+<p>Now change H11 to South and the answer follows. Better still, write the three region
 names down a column and fill the formula beside them. You have built a summary that
 answers all three questions at once and keeps answering them next month.</p>
 
@@ -106,11 +106,11 @@ answers all three questions at once and keeps answering them next month.</p>
     <tr><td class="corner"></td><th>H</th><th>I</th><th>J</th><th>K</th></tr>
   </thead>
   <tbody>
-    <tr class="head"><th class="rownum">3</th><td>Region</td><td>Revenue</td><td>Reps</td><td>Average</td></tr>
-    <tr><th class="rownum">4</th><td class="hl">North</td><td class="num formula">1290.00</td><td class="num formula">2</td><td class="num formula">645.00</td></tr>
-    <tr><th class="rownum">5</th><td class="hl">South</td><td class="num formula">787.50</td><td class="num formula">2</td><td class="num formula">393.75</td></tr>
-    <tr><th class="rownum">6</th><td class="hl">East</td><td class="num formula">1350.00</td><td class="num formula">2</td><td class="num formula">675.00</td></tr>
-    <tr class="head"><th class="rownum">7</th><td>Total</td><td class="num">3427.50</td><td class="num">6</td><td></td></tr>
+    <tr class="head"><th class="rownum">10</th><td>Region</td><td>Revenue</td><td>Reps</td><td>Average</td></tr>
+    <tr><th class="rownum">11</th><td class="hl">North</td><td class="num formula">1290.00</td><td class="num formula">2</td><td class="num formula">645.00</td></tr>
+    <tr><th class="rownum">12</th><td class="hl">South</td><td class="num formula">787.50</td><td class="num formula">2</td><td class="num formula">393.75</td></tr>
+    <tr><th class="rownum">13</th><td class="hl">East</td><td class="num formula">1350.00</td><td class="num formula">2</td><td class="num formula">675.00</td></tr>
+    <tr class="head"><th class="rownum">14</th><td>Total</td><td class="num">3427.50</td><td class="num">6</td><td></td></tr>
   </tbody>
 </table>
 </div>
@@ -128,9 +128,9 @@ identically, so learning one teaches you all three.</p>
     <tr><th>Question</th><th>Formula</th></tr>
   </thead>
   <tbody>
-    <tr><td>How much did North sell?</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H4)</span></td></tr>
-    <tr><td>How many North rows are there?</td><td><span class="fx">=COUNTIFS(Sales[Region], H4)</span></td></tr>
-    <tr><td>What is North's average sale?</td><td><span class="fx">=AVERAGEIFS(Sales[Revenue], Sales[Region], H4)</span></td></tr>
+    <tr><td>How much did North sell?</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
+    <tr><td>How many North rows are there?</td><td><span class="fx">=COUNTIFS(Sales[Region], H11)</span></td></tr>
+    <tr><td>What is North's average sale?</td><td><span class="fx">=AVERAGEIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
   </tbody>
 </table>
 
@@ -141,7 +141,7 @@ functions in
 functions by category</a>.</p>
 
 <div class="drill" data-drill="choice">
-  <p class="drill-q">Why is it better to put the word North in cell H4 than to type it
+  <p class="drill-q">Why is it better to put the word North in cell H11 than to type it
   inside the formula?</p>
   <ul class="opts">
     <li><button class="opt" data-correct="true" data-why="Yes, and it is the same rule as lesson 1. Anything that might change belongs in a cell of its own.">The criteria cell can change and every summary updates at once</button></li>
@@ -161,7 +161,7 @@ plus 1350 is 3427.50, which matches the total row from
 misspelled somewhere in the data.</p>
 
 <p>Build that check into the sheet rather than doing it in your head. Put
-<span class="fx">=SUM(I4:I6)-SUM(Sales[Revenue])</span> in a spare cell. It should read
+<span class="fx">=SUM(I11:I13)-SUM(Sales[Revenue])</span> in a spare cell. It should read
 zero, and if it ever stops reading zero, something upstream changed.</p>
 
 <div class="drill" data-drill="order">
@@ -179,13 +179,13 @@ zero, and if it ever stops reading zero, something upstream changed.</p>
 <h2>Do this now</h2>
 
 <div class="step">
-  <p>In <span class="fx">H4</span>, <span class="fx">H5</span> and
-  <span class="fx">H6</span>, type North, South and East.</p>
+  <p>In <span class="fx">H11</span>, <span class="fx">H12</span> and
+  <span class="fx">H13</span>, type North, South and East. Row 10 holds the headings.</p>
 </div>
 <div class="step">
-  <p>In <span class="fx">I4</span> write
-  <span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H4)</span> and fill it down to
-  I6. Note that <span class="fx">H4</span> moves with the fill, which is exactly what you
+  <p>In <span class="fx">I11</span> write
+  <span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H11)</span> and fill it down to
+  I13. Note that <span class="fx">H11</span> moves with the fill, which is exactly what you
   want here, and why it has no dollar signs.</p>
 </div>
 <div class="step">

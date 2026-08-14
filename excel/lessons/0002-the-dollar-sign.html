@@ -50,48 +50,53 @@ it.</p>
 <div class="gridwrap">
 <table class="grid">
   <thead>
-    <tr><td class="corner"></td><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr>
+    <tr><td class="corner"></td><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th></tr>
   </thead>
   <tbody>
-    <tr class="head"><th class="rownum">1</th><td>Region</td><td>Rep</td><td>Units</td><td>Price</td><td>Revenue</td><td>Commission</td><td>Comm rate</td><td class="num hl">0.08</td></tr>
-    <tr><th class="rownum">2</th><td>North</td><td>Ana</td><td class="num">120</td><td class="num">4.50</td><td class="num">540.00</td><td class="num">43.20</td><td></td><td></td></tr>
-    <tr><th class="rownum">3</th><td>South</td><td>Ben</td><td class="num">80</td><td class="num">4.50</td><td class="num">360.00</td><td class="num">28.80</td><td></td><td></td></tr>
-    <tr><th class="rownum">4</th><td>North</td><td>Cara</td><td class="num">200</td><td class="num">3.75</td><td class="num">750.00</td><td class="num">60.00</td><td></td><td></td></tr>
-    <tr><th class="rownum">5</th><td>East</td><td>Dan</td><td class="num">150</td><td class="num">3.75</td><td class="num">562.50</td><td class="num">45.00</td><td></td><td></td></tr>
-    <tr><th class="rownum">6</th><td>South</td><td>Eve</td><td class="num">95</td><td class="num">4.50</td><td class="num">427.50</td><td class="num">34.20</td><td></td><td></td></tr>
-    <tr><th class="rownum">7</th><td>East</td><td>Finn</td><td class="num">210</td><td class="num">3.75</td><td class="num">787.50</td><td class="num">63.00</td><td></td><td></td></tr>
+    <tr class="head"><th class="rownum">1</th><td>Region</td><td>Rep</td><td>Units</td><td>Price</td><td>Revenue</td><td>Commission</td><td></td><td class="plain">Comm rate</td><td class="num hl plain">0.08</td></tr>
+    <tr><th class="rownum">2</th><td>North</td><td>Ana</td><td class="num">120</td><td class="num">4.50</td><td class="num">540.00</td><td class="num">43.20</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">3</th><td>South</td><td>Ben</td><td class="num">80</td><td class="num">4.50</td><td class="num">360.00</td><td class="num">28.80</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">4</th><td>North</td><td>Cara</td><td class="num">200</td><td class="num">3.75</td><td class="num">750.00</td><td class="num">60.00</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">5</th><td>East</td><td>Dan</td><td class="num">150</td><td class="num">3.75</td><td class="num">562.50</td><td class="num">45.00</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">6</th><td>South</td><td>Eve</td><td class="num">95</td><td class="num">4.50</td><td class="num">427.50</td><td class="num">34.20</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">7</th><td>East</td><td>Finn</td><td class="num">210</td><td class="num">3.75</td><td class="num">787.50</td><td class="num">63.00</td><td></td><td></td><td></td></tr>
   </tbody>
 </table>
 </div>
-<p class="gridcap">The commission rate sits in <span class="fx">H1</span>, tinted above.
-One cell, one rate, referred to by all six rows.</p>
+<p class="gridcap">The commission rate sits in <span class="fx">I1</span>, tinted above.
+One cell, one rate, referred to by all six rows. Column G is deliberately left empty, for
+a reason that matters in <a href="0003-tables.html">lesson 3</a>.</p>
 
 <h2>Sometimes moving is exactly wrong</h2>
 
 <p>Now add commission. The rate is 8 percent. Following the rule from lesson 1, the rate
-goes in its own cell rather than inside a formula. Put the label in
-<span class="fx">G1</span> and the number <span class="fx">0.08</span> in
-<span class="fx">H1</span>.</p>
+goes in its own cell rather than inside a formula.</p>
+
+<p><strong>Skip column G and leave it completely empty.</strong> Put the label in
+<span class="fx">H1</span> and the number <span class="fx">0.08</span> in
+<span class="fx">I1</span>. That empty column looks like wasted space and it is not. Excel
+works out where a block of data ends by looking for a fully blank row or column, so the
+gap is what tells it your data stops at column F. Lesson 3 depends on it entirely.</p>
 
 <p>In <span class="fx">F2</span>, the obvious formula is this.</p>
 
-<p class="fx fx-block">=E2*H1</p>
+<p class="fx fx-block">=E2*I1</p>
 
 <p>It gives 43.20, which is right. Fill it down to <span class="fx">F7</span> and the
 column falls apart. F3 shows 0. So do F4 through F7.</p>
 
 <p>Click <span class="fx">F3</span> and read the formula bar. It says
-<span class="fx">=E3*H2</span>. The revenue reference moved down correctly. The rate
-reference moved down too, and <span class="fx">H2</span> is empty. Multiplying by an empty
+<span class="fx">=E3*I2</span>. The revenue reference moved down correctly. The rate
+reference moved down too, and <span class="fx">I2</span> is empty. Multiplying by an empty
 cell gives zero.</p>
 
 <p>Both references moved, because both were relative. You wanted only one of them to.</p>
 
 <div class="drill" data-drill="choice">
-  <p class="drill-q">You wrote <span class="fx">=E2*H1</span> in F2 and filled it down to
+  <p class="drill-q">You wrote <span class="fx">=E2*I1</span> in F2 and filled it down to
   F7. Every row below the first shows zero. Why?</p>
   <ul class="opts">
-    <li><button class="opt" data-correct="true" data-why="Exactly. Both references were relative, so both slid. The rate slid off its own cell into empty ones.">The rate reference slides down to H2, H3 and returns zero</button></li>
+    <li><button class="opt" data-correct="true" data-why="Exactly. Both references were relative, so both slid. The rate slid off its own cell into empty ones.">The rate reference slides down to I2, I3 and returns zero</button></li>
     <li><button class="opt" data-correct="false" data-why="The revenue reference is the one that behaved correctly. It moved with the rows, which is what you wanted.">The revenue reference stops moving and every row repeats row two</button></li>
     <li><button class="opt" data-correct="false" data-why="No error appears, and that is the danger. Zero looks like a real answer in a way that #REF never does.">The formula breaks and every cell in the column shows #REF</button></li>
   </ul>
@@ -107,26 +112,26 @@ cell gives zero.</p>
     <tr><th>Form</th><th>Name</th><th>What moves when you copy it</th></tr>
   </thead>
   <tbody>
-    <tr><td><span class="fx">H1</span></td><td>Relative</td><td>Both the column and the row move</td></tr>
-    <tr><td><span class="fx">$H$1</span></td><td>Absolute</td><td>Nothing moves. It always points at H1</td></tr>
-    <tr><td><span class="fx">$H1</span></td><td>Mixed</td><td>Column stays H, row moves</td></tr>
-    <tr><td><span class="fx">H$1</span></td><td>Mixed</td><td>Row stays 1, column moves</td></tr>
+    <tr><td><span class="fx">I1</span></td><td>Relative</td><td>Both the column and the row move</td></tr>
+    <tr><td><span class="fx">$I$1</span></td><td>Absolute</td><td>Nothing moves. It always points at I1</td></tr>
+    <tr><td><span class="fx">$I1</span></td><td>Mixed</td><td>Column stays I, row moves</td></tr>
+    <tr><td><span class="fx">I$1</span></td><td>Mixed</td><td>Row stays 1, column moves</td></tr>
   </tbody>
 </table>
 
 <p>So the commission formula should be this.</p>
 
-<p class="fx fx-block">=E2*$H$1</p>
+<p class="fx fx-block">=E2*$I$1</p>
 
-<p>Fill that down and every row is right, because <span class="fx">$H$1</span> refuses to
+<p>Fill that down and every row is right, because <span class="fx">$I$1</span> refuses to
 move while <span class="fx">E2</span> happily does.</p>
 
 <div class="callout">
   <p class="kicker">The keystroke</p>
   <p>You do not have to type dollar signs. Click into the formula, put the cursor on a
   reference, and press <span class="kbd">F4</span>. It cycles
-  <span class="fx">H1</span>, <span class="fx">$H$1</span>, <span class="fx">H$1</span>,
-  <span class="fx">$H1</span> and back. On many Macs this is
+  <span class="fx">I1</span>, <span class="fx">$I$1</span>, <span class="fx">I$1</span>,
+  <span class="fx">$I1</span> and back. On many Macs this is
   <span class="kbd">Command</span> <span class="kbd">T</span>, and on some laptops you
   need <span class="kbd">Fn</span> <span class="kbd">F4</span>.</p>
 </div>
@@ -155,21 +160,25 @@ of each answer that is no.</p>
 <h2>Do this now</h2>
 
 <div class="step">
-  <p>Set <span class="fx">C2</span> back to 120. Put <span class="fx">Comm rate</span> in
-  G1 and <span class="fx">0.08</span> in H1.</p>
+  <p>Set <span class="fx">C2</span> back to 120. Leave column G empty. Put
+  <span class="fx">Comm rate</span> in H1 and <span class="fx">0.08</span> in I1.</p>
 </div>
 <div class="step">
-  <p>In <span class="fx">F2</span> type <span class="fx">=E2*H1</span>. Fill it down to
+  <p>In <span class="fx">F2</span> type <span class="fx">=E2*I1</span>. Fill it down to
   F7 and look at the zeros. See the failure once, deliberately.</p>
 </div>
 <div class="step">
-  <p>Click <span class="fx">F2</span>, click on <span class="fx">H1</span> in the formula
+  <p>Click <span class="fx">F2</span>, click on <span class="fx">I1</span> in the formula
   bar, press <span class="kbd">F4</span>. Press <span class="kbd">Enter</span>. Fill down
   again. All six rows are now right.</p>
 </div>
 <div class="step">
-  <p>Change H1 to <span class="fx">0.10</span>. All six commissions update at once. That
+  <p>Change I1 to <span class="fx">0.10</span>. All six commissions update at once. That
   is what the whole lesson bought you.</p>
+</div>
+<div class="step">
+  <p>Check that column G is still completely empty, with nothing at all in it. Lesson 3
+  will not work properly if anything has crept into it.</p>
 </div>
 
 <div class="drill" data-drill="order">
