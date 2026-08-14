@@ -3,6 +3,10 @@
 Lessons and reference cards built from books, one folder per subject.
 `index.html` is a searchable index of everything.
 
+**Live at <https://mightymoose.github.io/Learn/>**, served by GitHub Pages from `main`.
+A push to `main` republishes the site. Run `sh tools/check.sh` before you push. It
+rebuilds `search-index.js`, and a page missing from that file will not reach the site.
+
 ## Layout
 
 ```
