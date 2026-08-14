@@ -1,0 +1,337 @@
+/* lesson.css — shared stylesheet for the Lang Algebra teaching workspace.
+   Every lesson and reference card links this file. Edit here, not in a lesson.
+   Design target: Tufte-ish. Long measure, wide margin for notes, prints clean. */
+
+:root {
+  --ink: #111008;
+  --ink-soft: #4a4740;
+  --ink-faint: #6f6b62;
+  --paper: #fffef8;
+  --rule: #ddd9cc;
+  --accent: #7a1c12;
+  --accent-soft: #f4ece4;
+  --good: #1c5e34;
+  --bad: #8a2018;
+  --measure: 36rem;
+  --serif: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --mono: "SF Mono", "IBM Plex Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #e8e4d9;
+    --ink-soft: #b3ada0;
+    --ink-faint: #8b857a;
+    --paper: #16150f;
+    --rule: #35322a;
+    --accent: #e8907f;
+    --accent-soft: #241f1c;
+    --good: #7fc79a;
+    --bad: #e8907f;
+  }
+}
+
+html { font-size: 17px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 1.62;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+  max-width: 60rem;
+  counter-reset: step;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1.2rem;
+  margin-bottom: 2.5rem;
+  max-width: var(--measure);
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 0.6rem;
+}
+
+h1 {
+  font-size: 2.1rem;
+  line-height: 1.15;
+  font-weight: 400;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.standfirst {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0;
+  max-width: var(--measure);
+}
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin: 3rem 0 0.9rem;
+  max-width: var(--measure);
+  letter-spacing: -0.005em;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 2rem 0 0.6rem;
+  max-width: var(--measure);
+}
+
+p, ul, ol, blockquote, .box, .callout, table {
+  max-width: var(--measure);
+}
+
+p { margin: 0 0 1.1rem; }
+li { margin-bottom: 0.45rem; }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
+}
+
+strong { font-weight: 600; }
+
+/* ---------- the win banner: what you can do after this lesson ---------- */
+
+.win {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 1rem 1.2rem;
+  margin: 2rem 0;
+  max-width: var(--measure);
+}
+.win .kicker { margin-bottom: 0.35rem; }
+.win p:last-child { margin-bottom: 0; }
+
+/* ---------- maths ---------- */
+
+.m { font-family: var(--serif); font-style: italic; }
+.m-up { font-style: normal; }
+
+.display {
+  text-align: center;
+  margin: 1.4rem 0;
+  font-style: italic;
+  font-size: 1.05rem;
+  max-width: var(--measure);
+}
+
+/* Commutative diagrams are inline SVG; keep them centred and theme-aware. */
+.diagram {
+  display: block;
+  margin: 1.6rem auto;
+  max-width: 100%;
+  height: auto;
+}
+.diagram text { font-family: var(--serif); font-style: italic; fill: var(--ink); }
+.diagram .lbl { font-size: 13px; }
+.diagram .obj { font-size: 17px; }
+.diagram path, .diagram line { stroke: var(--ink); fill: none; stroke-width: 1.1; }
+.diagram .arrowhead { fill: var(--ink); stroke: none; }
+.diagram .dashed { stroke-dasharray: 4 3; }
+.diagram .cap { font-style: normal; font-size: 11px; fill: var(--ink-faint); }
+.diagram .up { font-style: normal; }
+
+.figcap {
+  max-width: var(--measure);
+  margin: -0.8rem auto 1.8rem;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+/* ---------- quotation from the source text ---------- */
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+}
+
+/* ---------- numbered steps ---------- */
+
+.step {
+  position: relative;
+  padding-left: 2.4rem;
+  margin-bottom: 1.3rem;
+  max-width: var(--measure);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 1.55rem;
+  height: 1.55rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+/* ---------- callout ---------- */
+
+.callout {
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  margin: 1.8rem 0;
+  background: transparent;
+}
+.callout p:last-child { margin-bottom: 0; }
+.callout .kicker { margin-bottom: 0.4rem; }
+
+/* ---------- interactive drills (behaviour lives in assets/quiz.js) ---------- */
+
+.drill {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.4rem 0;
+  margin: 2rem 0;
+  max-width: var(--measure);
+}
+
+.drill-q { font-weight: 600; margin-bottom: 0.9rem; }
+
+.opts { list-style: none; padding: 0; margin: 0; }
+
+.opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 0.97rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+.opt:hover:not([disabled]) { border-color: var(--ink-faint); }
+.opt[disabled] { cursor: default; }
+.opt.correct { border-color: var(--good); color: var(--good); }
+.opt.wrong { border-color: var(--bad); color: var(--bad); text-decoration: line-through; }
+
+.feedback {
+  margin-top: 0.7rem;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  min-height: 1.2rem;
+}
+.feedback.show { animation: fade 0.25s ease; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ordering drill */
+.seq { list-style: none; padding: 0; margin: 0 0 0.6rem; }
+.seq .opt { position: relative; padding-left: 2.4rem; }
+.seq .opt .slot {
+  position: absolute;
+  left: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+.seq .opt.placed { border-color: var(--good); color: var(--ink-faint); }
+
+.drill-reset {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.4rem;
+}
+
+/* ---------- reference-card tables ---------- */
+
+table { border-collapse: collapse; margin: 1.4rem 0; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 400; }
+
+/* ---------- footer ---------- */
+
+.footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding-top: 1.4rem;
+  max-width: var(--measure);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.footer h3 { margin-top: 0; }
+
+.ask {
+  border: 1px dashed var(--rule);
+  padding: 0.9rem 1.1rem;
+  margin: 1.6rem 0;
+  max-width: var(--measure);
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+}
+
+.nav { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; }
+.nav a { margin-right: 1.2rem; }
+
+/* ---------- print ---------- */
+
+@media print {
+  :root {
+    --ink: #000; --ink-soft: #333; --ink-faint: #555;
+    --paper: #fff; --rule: #bbb; --accent: #000; --accent-soft: #f2f2f2;
+    --good: #000; --bad: #000;
+  }
+  html { font-size: 11pt; }
+  body { padding: 0; max-width: none; }
+  a { color: #000; text-decoration: none; }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--mono);
+    font-size: 0.72em;
+    color: #555;
+    word-break: break-all;
+  }
+  .drill, .callout, .win, blockquote, table, .step { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  .opt { border-color: #bbb; }
+  .drill-reset, .nav { display: none; }
+  .feedback::before { content: "answer: "; }
+}

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference &middot; Universal Properties</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Reference card &middot; Lang, Chapter I, &sect;11</p>
+  <h1>Universal properties</h1>
+  <p class="standfirst">One page. Print it. Everything here is checked against Lang, pp. 57&ndash;59.</p>
+</header>
+
+<h2>The two definitions</h2>
+
+<table>
+  <thead>
+    <tr><th>Name</th><th>Condition on <span class="m">P</span></th><th>Arrows</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Universally&nbsp;attracting</td>
+      <td>For each object <span class="m">X</span>, exactly one morphism
+          <span class="m">X &rarr; P</span>.</td>
+      <td>point at <span class="m">P</span></td>
+    </tr>
+    <tr>
+      <td>Universally&nbsp;repelling</td>
+      <td>For each object <span class="m">X</span>, exactly one morphism
+          <span class="m">P &rarr; X</span>.</td>
+      <td>leave <span class="m">P</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Lang writes <strong>universal</strong> for either one when the direction is clear
+(p. 58). Elsewhere you will meet <em>terminal</em> for attracting and <em>initial</em> for
+repelling. They mean the same thing.</p>
+
+<h2>The theorem you get for free</h2>
+
+<p><strong>Two universal objects in the same category are isomorphic by a unique
+isomorphism.</strong> (Lang, p. 58.)</p>
+
+<p>Proof in the attracting case, four steps:</p>
+
+<div class="step">Unique <span class="m">u</span>&thinsp;:&thinsp;<span class="m">P&prime; &rarr; P</span>,
+because <span class="m">P</span> attracts.</div>
+<div class="step">Unique <span class="m">v</span>&thinsp;:&thinsp;<span class="m">P &rarr; P&prime;</span>,
+because <span class="m">P&prime;</span> attracts.</div>
+<div class="step"><span class="m">u &compfn; v</span> and <span class="m">id</span> both run
+<span class="m">P &rarr; P</span>.</div>
+<div class="step">Only one such morphism exists, so
+<span class="m">u &compfn; v</span> = <span class="m">id</span>. Symmetrically
+<span class="m">v &compfn; u</span> = <span class="m">id</span>.</div>
+
+<p>The identity morphism is the hinge. Reverse every arrow for the repelling case.</p>
+
+<div class="callout">
+  <p class="kicker">Why the word &ldquo;unique&rdquo; matters twice</p>
+  <p>Unique <em>isomorphism</em> is stronger than isomorphic. Two cyclic groups of order
+  <span class="m">n</span> are isomorphic, but the isomorphism depends on a choice of
+  generator. A universal object leaves no choice, so a paper may write
+  &ldquo;the&rdquo; product and identify any two constructions of it.</p>
+</div>
+
+<h2>Recipe: turn a stated property into a universal object</h2>
+
+<div class="step">Find the data the property quantifies over. For the product that is a
+triple <span class="m">(C, &phi;, &psi;)</span>, not just <span class="m">C</span>.</div>
+<div class="step">Make that data the <em>objects</em> of a new category.</div>
+<div class="step">Make a morphism the underlying map that respects every leg.</div>
+<div class="step">Read the arrow direction off the &ldquo;unique <span class="m">h</span>&rdquo;
+clause. Into the object means attracting, out of it means repelling.</div>
+
+<h2>Product and coproduct</h2>
+
+<table>
+  <thead>
+    <tr><th></th><th>Product</th><th>Coproduct</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data</td>
+      <td><span class="m">(P, {f<sub>i</sub>})</span> with
+          <span class="m">f<sub>i</sub> : P &rarr; A<sub>i</sub></span></td>
+      <td><span class="m">(S, {f<sub>i</sub>})</span> with
+          <span class="m">f<sub>i</sub> : A<sub>i</sub> &rarr; S</span></td>
+    </tr>
+    <tr>
+      <td>Given</td>
+      <td><span class="m">g<sub>i</sub> : C &rarr; A<sub>i</sub></span></td>
+      <td><span class="m">g<sub>i</sub> : A<sub>i</sub> &rarr; C</span></td>
+    </tr>
+    <tr>
+      <td>Unique map</td>
+      <td><span class="m">h : C &rarr; P</span> with
+          <span class="m">f<sub>i</sub> &compfn; h = g<sub>i</sub></span></td>
+      <td><span class="m">h : S &rarr; C</span> with
+          <span class="m">h &compfn; f<sub>i</sub> = g<sub>i</sub></span></td>
+    </tr>
+    <tr>
+      <td>In its category</td>
+      <td>attracting</td>
+      <td>repelling</td>
+    </tr>
+    <tr>
+      <td>Notation</td>
+      <td><span class="m">A &times; B</span>,
+          <span class="m up">&prod;</span><span class="m">A<sub>i</sub></span></td>
+      <td>Lang, p. 59, foot</td>
+    </tr>
+    <tr>
+      <td>Lang page</td>
+      <td>58&ndash;59</td>
+      <td>59</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In the category of sets the product is the cartesian product with its projections
+(Lang, p. 59). In the category of groups it is the direct product with its projection
+homomorphisms (Lang, p. 59).</p>
+
+<h2>Where Lang reuses the pattern</h2>
+
+<p>He lists these himself on p. 58, then adds more later.</p>
+
+<table>
+  <thead>
+    <tr><th>Object</th><th>Location in Lang</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Trivial group, both directions at once</td><td>I, &sect;11, p. 58</td></tr>
+    <tr><td><span class="m">&Zopf;</span> in rings, repelling</td><td>I, &sect;11, p. 58</td></tr>
+    <tr><td>Free abelian group on a set</td><td>I, &sect;7 and &sect;11, p. 58</td></tr>
+    <tr><td>Grothendieck group of a commutative monoid</td><td>I, &sect;11, p. 58</td></tr>
+    <tr><td>Products and coproducts</td><td>I, &sect;11, pp. 58&ndash;59</td></tr>
+    <tr><td>Direct and inverse limits</td><td>I, &sect;10, p. 49</td></tr>
+    <tr><td>Free groups</td><td>I, &sect;12, p. 66</td></tr>
+    <tr><td>Tensor product</td><td>XVI, &sect;1</td></tr>
+    <tr><td>Alternating product</td><td>XIX, &sect;1</td></tr>
+    <tr><td>Clifford algebra</td><td>XIX, &sect;4</td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  <p>Source: Lang, <em>Algebra</em>, revised 3rd edition, Springer GTM 211, 2002, pp. 57&ndash;59.
+  Deeper worked examples in
+  <a href="https://kconrad.math.uconn.edu/blurbs/linmultialg/universalmapping.pdf">Keith
+  Conrad, &ldquo;Universal Mapping Properties&rdquo;</a>.</p>
+  <p class="nav">
+    <a href="../lessons/0001-universal-objects.html">Lesson 01</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+    <a href="../RESOURCES.md">Resources</a>
+  </p>
+</div>
+
+</body>
+</html>
