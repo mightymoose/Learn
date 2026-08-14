@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 04 &middot; Answering Questions</title>
+<meta name="learn:subject" content="Excel">
+<meta name="learn:type" content="lesson">
+<meta name="learn:source" content="Microsoft, Excel functions by category">
+<meta name="learn:section" content="Tier 1 &middot; Foundations">
+<meta name="learn:order" content="1.04">
+<meta name="learn:status" content="current">
+<meta name="learn:tags" content="SUMIFS, COUNTIFS, AVERAGEIFS, criteria, summary block, beginner">
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Lesson 04 &middot; Tier 1, Foundations</p>
+  <h1>Answering questions</h1>
+  <p class="standfirst">Adding up everything is easy. Adding up only the rows that match a
+  condition is the first thing that feels like analysis.</p>
+</header>
+
+<div class="win">
+  <p class="kicker">After this lesson</p>
+  <p>You can answer "how much did the North region sell" with a formula instead of by
+  filtering and squinting at the status bar. You can build a small summary block that
+  updates itself, and you can change the question without rewriting the formula.</p>
+</div>
+
+<h2>The manual way, and why it does not last</h2>
+
+<p>You already have a Table called Sales with a Revenue column. To find North's revenue
+you could click the filter arrow, tick North, and read the sum off the bottom of the
+window.</p>
+
+<p>That works exactly once. It leaves no record, it cannot be checked by anyone else, and
+tomorrow you have to do it again. Nothing about it survives a new month of data.</p>
+
+<p>What you want is a cell that permanently means <em>North's revenue</em>.</p>
+
+<h2>SUMIFS</h2>
+
+<p>The function is <span class="fx">SUMIFS</span>. Read the name as <em>sum, if these
+conditions hold</em>. Put this somewhere outside the Table.</p>
+
+<p class="fx fx-block">=SUMIFS(Sales[Revenue], Sales[Region], "North")</p>
+
+<p>It returns 1290, which is Ana's 540 plus Cara's 750. Read the arguments in order.</p>
+
+<table>
+  <thead>
+    <tr><th>Argument</th><th>Meaning</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="fx">Sales[Revenue]</span></td><td>The column to add up. This one comes first.</td></tr>
+    <tr><td><span class="fx">Sales[Region]</span></td><td>The column to test.</td></tr>
+    <tr><td><span class="fx">"North"</span></td><td>What it has to equal.</td></tr>
+  </tbody>
+</table>
+
+<p>The last two arguments come as a pair, and you can keep adding pairs. To ask for
+North's revenue at the higher price only, add a second condition.</p>
+
+<p class="fx fx-block">=SUMIFS(Sales[Revenue], Sales[Region], "North", Sales[Price], 4.5)</p>
+
+<p>Every pair narrows the result further. All conditions must hold at once.</p>
+
+<div class="callout">
+  <p class="kicker">The trap</p>
+  <p>There is an older function called <span class="fx">SUMIF</span>, with no S, and it
+  takes its arguments in the opposite order. Forum answers mix the two constantly. Use
+  <span class="fx">SUMIFS</span> always, even for a single condition. One function, one
+  argument order, one thing to remember.</p>
+</div>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">In <span class="fx">SUMIFS</span>, which range do you write first?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true" data-why="Right. SUMIFS puts the numbers you want added at the front, then condition pairs after it.">The range to add comes first, then the range to test</button></li>
+    <li><button class="opt" data-correct="false" data-why="That is SUMIF, the older single-condition version. Mixing the two up is the most common cause of a wrong total.">The range to test comes first, then the range to add</button></li>
+    <li><button class="opt" data-correct="false" data-why="Excel infers nothing here. Swap the ranges and you get a wrong number or a zero, with no warning at all.">The order does not matter, because Excel infers it from types</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>Put the question in a cell</h2>
+
+<p>The formula above has <span class="fx">"North"</span> typed inside it. That is the
+mistake from <a href="0001-formulas-not-numbers.html">lesson 1</a> wearing a different
+hat. To ask about South you would have to edit the formula.</p>
+
+<p>Put the region name in its own cell instead. If <span class="fx">H4</span> holds the
+word North, the formula becomes this.</p>
+
+<p class="fx fx-block">=SUMIFS(Sales[Revenue], Sales[Region], H4)</p>
+
+<p>Now change H4 to South and the answer follows. Better still, write the three region
+names down a column and fill the formula beside them. You have built a summary that
+answers all three questions at once and keeps answering them next month.</p>
+
+<div class="gridwrap">
+<table class="grid">
+  <thead>
+    <tr><td class="corner"></td><th>H</th><th>I</th><th>J</th><th>K</th></tr>
+  </thead>
+  <tbody>
+    <tr class="head"><th class="rownum">3</th><td>Region</td><td>Revenue</td><td>Reps</td><td>Average</td></tr>
+    <tr><th class="rownum">4</th><td class="hl">North</td><td class="num formula">1290.00</td><td class="num formula">2</td><td class="num formula">645.00</td></tr>
+    <tr><th class="rownum">5</th><td class="hl">South</td><td class="num formula">787.50</td><td class="num formula">2</td><td class="num formula">393.75</td></tr>
+    <tr><th class="rownum">6</th><td class="hl">East</td><td class="num formula">1350.00</td><td class="num formula">2</td><td class="num formula">675.00</td></tr>
+    <tr class="head"><th class="rownum">7</th><td>Total</td><td class="num">3427.50</td><td class="num">6</td><td></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="gridcap">The summary block. Column H holds the questions, tinted. Columns I to K
+hold formulas that read them. The total matches the Table's own total row, which is how
+you know the block is right.</p>
+
+<h2>The rest of the family</h2>
+
+<p>The same pattern gives you counting and averaging. The condition pairs work
+identically, so learning one teaches you all three.</p>
+
+<table>
+  <thead>
+    <tr><th>Question</th><th>Formula</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>How much did North sell?</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H4)</span></td></tr>
+    <tr><td>How many North rows are there?</td><td><span class="fx">=COUNTIFS(Sales[Region], H4)</span></td></tr>
+    <tr><td>What is North's average sale?</td><td><span class="fx">=AVERAGEIFS(Sales[Revenue], Sales[Region], H4)</span></td></tr>
+  </tbody>
+</table>
+
+<p><span class="fx">COUNTIFS</span> has no range to add up, so it starts straight in on
+condition pairs. That is the one difference. All three are listed under Statistical
+functions in
+<a href="https://support.microsoft.com/en-us/office/excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb">Excel
+functions by category</a>.</p>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">Why is it better to put the word North in cell H4 than to type it
+  inside the formula?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true" data-why="Yes, and it is the same rule as lesson 1. Anything that might change belongs in a cell of its own.">The criteria cell can change and every summary updates at once</button></li>
+    <li><button class="opt" data-correct="false" data-why="There is no speed difference worth measuring. The reason is maintenance, not performance.">Typed text runs faster because Excel skips one lookup per row</button></li>
+    <li><button class="opt" data-correct="false" data-why="Both forms handle capitals fine. In fact these functions ignore case, so north and North match equally.">A typed string is required whenever the criteria contains a capital</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>Check your own work</h2>
+
+<p>This is the habit that makes you trusted rather than merely fast.</p>
+
+<p>Your three regional totals should add up to the Table's grand total. 1290 plus 787.50
+plus 1350 is 3427.50, which matches the total row from
+<a href="0003-tables.html">lesson 3</a>. If it did not match, a region would be missing or
+misspelled somewhere in the data.</p>
+
+<p>Build that check into the sheet rather than doing it in your head. Put
+<span class="fx">=SUM(I4:I6)-SUM(Sales[Revenue])</span> in a spare cell. It should read
+zero, and if it ever stops reading zero, something upstream changed.</p>
+
+<div class="drill" data-drill="order">
+  <p class="drill-q">Put the build of the summary block in order.</p>
+  <ul class="seq">
+    <li><button class="opt" data-pos="1">Write the three region names down a column outside the Table</button></li>
+    <li><button class="opt" data-pos="3">Fill the formula down beside the other two region names</button></li>
+    <li><button class="opt" data-pos="4">Add a cell that subtracts the block total from the Table total</button></li>
+    <li><button class="opt" data-pos="2">Write one SUMIFS beside the first name, pointing at that cell</button></li>
+  </ul>
+  <p class="feedback"></p>
+  <button class="drill-reset">Reset</button>
+</div>
+
+<h2>Do this now</h2>
+
+<div class="step">
+  <p>In <span class="fx">H4</span>, <span class="fx">H5</span> and
+  <span class="fx">H6</span>, type North, South and East.</p>
+</div>
+<div class="step">
+  <p>In <span class="fx">I4</span> write
+  <span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H4)</span> and fill it down to
+  I6. Note that <span class="fx">H4</span> moves with the fill, which is exactly what you
+  want here, and why it has no dollar signs.</p>
+</div>
+<div class="step">
+  <p>Add the COUNTIFS and AVERAGEIFS columns beside it.</p>
+</div>
+<div class="step">
+  <p>Add the zero check. Then misspell one Region value in the Table on purpose and watch
+  the check stop reading zero. Fix it again.</p>
+</div>
+
+<div class="ask">
+  <p><strong>Ask your teacher.</strong> Good questions here: how to write a condition like
+  "greater than 500" rather than an exact match, what to do when the criteria list should
+  come from the data instead of being typed, or why a region total silently comes out as
+  zero.</p>
+</div>
+
+<div class="callout">
+  <p class="kicker">Read this next</p>
+  <p>Keep the <a href="../reference/aggregation.html">reference card on aggregation</a>
+  beside you. It has the argument order and the condition forms on one printable page.</p>
+  <p>That is the end of tier 1. You now have the four things everything else is built on:
+  formulas that reference cells, references that lock correctly, data that knows how big
+  it is, and answers to conditional questions.</p>
+  <p><strong>Tier 2 is not written yet, on purpose.</strong> The next lesson is about
+  lookups, and lookups are the point where Excel versions genuinely differ. Tell your
+  teacher which Excel you have, from the <em>Account</em> or <em>About Excel</em> screen,
+  and whether you are on Windows or Mac. The lesson gets written to match. The full ladder
+  is on the <a href="../reference/0000-course-roadmap.html">roadmap</a>.</p>
+</div>
+
+<div class="footer">
+  <h3>References</h3>
+  <p>Microsoft, <a href="https://support.microsoft.com/en-us/office/excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb">Excel
+  functions by category</a>, checked 2026-08-14. Worked examples for each function are at
+  <a href="https://exceljet.net/functions">Exceljet</a>. Full annotations in
+  <a href="../RESOURCES.md">RESOURCES.md</a>.</p>
+  <p>Nothing in this lesson depends on your Excel version.
+  <span class="fx">SUMIFS</span>, <span class="fx">COUNTIFS</span> and
+  <span class="fx">AVERAGEIFS</span> exist in every version this course supports.</p>
+  <p class="nav">
+    <a href="0003-tables.html">Previous</a>
+    <a href="../reference/aggregation.html">Reference card</a>
+    <a href="../reference/0000-course-roadmap.html">Roadmap</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+    <a href="../RESOURCES.md">Resources</a>
+  </p>
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

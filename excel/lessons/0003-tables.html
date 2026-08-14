@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 03 &middot; Tables</title>
+<meta name="learn:subject" content="Excel">
+<meta name="learn:type" content="lesson">
+<meta name="learn:source" content="Microsoft, Overview of Excel tables">
+<meta name="learn:section" content="Tier 1 &middot; Foundations">
+<meta name="learn:order" content="1.03">
+<meta name="learn:status" content="current">
+<meta name="learn:tags" content="Table, structured reference, calculated column, total row, Ctrl+T, beginner">
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Lesson 03 &middot; Tier 1, Foundations</p>
+  <h1>Tables</h1>
+  <p class="standfirst">One keystroke turns a block of cells into an object that knows how
+  big it is. After this, adding 500 rows stops breaking everything.</p>
+</header>
+
+<div class="win">
+  <p class="kicker">After this lesson</p>
+  <p>You can convert a range into a Table, write a formula once and have it apply to the
+  whole column, read a formula like <span class="fx">=SUM(Sales[Revenue])</span>, and add
+  new data at the bottom without touching a single formula.</p>
+</div>
+
+<h2>The problem left over from lesson 2</h2>
+
+<p>Your commission column works. Now somebody sends you next month's file with 500 more
+rows, and you paste them in below row 7.</p>
+
+<p>Nothing calculates. The formulas stop at row 7, because you filled them to row 7. Your
+total, if you wrote <span class="fx">=SUM(E2:E7)</span>, still adds six rows out of 506
+and reports a confident, wrong number.</p>
+
+<p>You could fill down again every time. People do this for years. The fix takes one
+keystroke.</p>
+
+<h2>Ctrl and T</h2>
+
+<p>Click any cell inside your data. Press <span class="kbd">Ctrl</span>
+<span class="kbd">T</span>. On a Mac it is the same keys. A small box appears asking
+whether your table has headers. It does, so leave that ticked, and press
+<span class="kbd">Enter</span>.</p>
+
+<p>The block gains banded colours and little filter arrows in the header row. That
+cosmetic change is not the point. The point is that Excel now treats those cells as one
+named object rather than as a coincidence of adjacent cells.</p>
+
+<p>Rename it immediately. With a cell inside the Table selected, go to the
+<em>Table Design</em> tab and type <span class="fx">Sales</span> in the Table Name box.
+The default name is <span class="fx">Table1</span>, which tells nobody anything.</p>
+
+<div class="callout">
+  <p class="kicker">One name for one thing</p>
+  <p>In this course a <strong>Table</strong> with a capital T always means the object made
+  by <span class="kbd">Ctrl</span> <span class="kbd">T</span>. A plain block of cells is a
+  <strong>range</strong>. The whole lesson is the difference between the two, so the words
+  never get swapped. See the <a href="../GLOSSARY.md">glossary</a>.</p>
+</div>
+
+<h2>Three things a Table does for you</h2>
+
+<h3>1. It grows</h3>
+
+<p>Type anything in the row directly below the last one. The Table swallows it. The
+banding extends, and every formula column fills itself in for the new row. Paste 500 rows
+and the same thing happens 500 times.</p>
+
+<h3>2. Its columns have names</h3>
+
+<p>Click an empty cell outside the Table and start typing <span class="fx">=SUM(</span>.
+Now select the whole Revenue column by clicking its header. Excel does not write
+<span class="fx">E2:E7</span>. It writes this.</p>
+
+<p class="fx fx-block">=SUM(Sales[Revenue])</p>
+
+<p>That is a <strong>structured reference</strong>. Read it as <em>the Revenue column of
+the Table called Sales</em>. It carries no row numbers at all, which is exactly why 500
+new rows cannot break it. Microsoft documents the form in
+<a href="https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c">Overview
+of Excel tables</a>.</p>
+
+<p>Inside the Table, a formula refers to the current row with <span class="fx">@</span>.
+Delete your Revenue formula and type this into any Revenue cell instead.</p>
+
+<p class="fx fx-block">=[@Units]*[@Price]</p>
+
+<p>Press <span class="kbd">Enter</span> and Excel fills the entire column at once. There
+is no filling down any more. The column is one formula, and Excel calls it a
+<strong>calculated column</strong>.</p>
+
+<h3>3. It can total itself</h3>
+
+<p>On the <em>Table Design</em> tab, tick <em>Total Row</em>. A row appears at the bottom.
+Click any cell in it and a small dropdown offers Sum, Average, Count and more. The total
+row moves down on its own as the Table grows.</p>
+
+<div class="gridwrap">
+<table class="grid">
+  <thead>
+    <tr><td class="corner"></td><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+  </thead>
+  <tbody>
+    <tr class="head"><th class="rownum">1</th><td>Region</td><td>Rep</td><td>Units</td><td>Price</td><td>Revenue</td><td>Commission</td></tr>
+    <tr><th class="rownum">2</th><td>North</td><td>Ana</td><td class="num">120</td><td class="num">4.50</td><td class="num formula">540.00</td><td class="num formula">43.20</td></tr>
+    <tr><th class="rownum">3</th><td>South</td><td>Ben</td><td class="num">80</td><td class="num">4.50</td><td class="num formula">360.00</td><td class="num formula">28.80</td></tr>
+    <tr><th class="rownum">4</th><td>North</td><td>Cara</td><td class="num">200</td><td class="num">3.75</td><td class="num formula">750.00</td><td class="num formula">60.00</td></tr>
+    <tr><th class="rownum">5</th><td>East</td><td>Dan</td><td class="num">150</td><td class="num">3.75</td><td class="num formula">562.50</td><td class="num formula">45.00</td></tr>
+    <tr><th class="rownum">6</th><td>South</td><td>Eve</td><td class="num">95</td><td class="num">4.50</td><td class="num formula">427.50</td><td class="num formula">34.20</td></tr>
+    <tr><th class="rownum">7</th><td>East</td><td>Finn</td><td class="num">210</td><td class="num">3.75</td><td class="num formula">787.50</td><td class="num formula">63.00</td></tr>
+    <tr class="head"><th class="rownum">8</th><td>Total</td><td></td><td class="num">855</td><td></td><td class="num hl">3427.50</td><td class="num hl">274.20</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="gridcap">The Table named Sales, with its total row. Green figures are calculated
+columns. Row 8 is the total row, and it moves down when data is added.</p>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">Your data is now a Table with a calculated Revenue column. A colleague
+  pastes 500 new rows at the bottom. What happens to the Revenue formula?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true" data-why="Yes. A calculated column applies to the column, not to a list of rows, so new rows are covered the moment they exist.">It fills into the new rows by itself and stays correct</button></li>
+    <li><button class="opt" data-correct="false" data-why="That is what happens with a plain range, and it is the problem Tables were built to remove.">It stops at row seven and the new rows stay empty</button></li>
+    <li><button class="opt" data-correct="false" data-why="Nothing breaks. Existing rows keep their values, because the calculated column is consistent across all rows.">It fills into the new rows but every earlier row breaks</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">What does <span class="fx">=SUM(Sales[Revenue])</span> buy you over
+  <span class="fx">=SUM(E2:E7)</span>?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true" data-why="Correct, and it also says what it means. Someone reading it learns the intent without hunting for the range.">It grows with the Table, so new rows are included automatically</button></li>
+    <li><button class="opt" data-correct="false" data-why="Speed is not the reason. On a small Table the two are indistinguishable, and structured references are not faster.">It calculates faster, because Excel stores a Table more efficiently inside</button></li>
+    <li><button class="opt" data-correct="false" data-why="A Table changes no number and no rounding. Formatting and calculation stay completely separate things.">It rounds the result, because a Table column carries its format</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>What Tables cost you</h2>
+
+<p>Two honest warnings, because a lesson that only sells a feature is not teaching.</p>
+
+<p>A Table cannot have merged cells, and it wants one heading per column with no blanks.
+If your data has a title row above the headings or two rows of headings, clean that up
+first. This is a feature, not a limitation. Data laid out that way was already going to
+cause trouble.</p>
+
+<p>Structured references do not fill sideways the way ordinary ones do. If you drag
+<span class="fx">=[@Units]</span> across, it does not step to the next column. That is
+rarely what you want inside a Table, but it surprises people once.</p>
+
+<h2>Do this now</h2>
+
+<div class="step">
+  <p>Click inside your data and press <span class="kbd">Ctrl</span>
+  <span class="kbd">T</span>. Confirm the headers box is ticked.</p>
+</div>
+<div class="step">
+  <p>On the <em>Table Design</em> tab, rename it from Table1 to
+  <span class="fx">Sales</span>.</p>
+</div>
+<div class="step">
+  <p>Replace the Revenue formula with <span class="fx">=[@Units]*[@Price]</span>. Watch
+  the whole column fill at once.</p>
+</div>
+<div class="step">
+  <p>Tick <em>Total Row</em>, and set the Revenue total to Sum. You should see 3427.50.</p>
+</div>
+<div class="step">
+  <p>Now type a new rep in row 8, above the total row. Revenue and Commission calculate
+  themselves, and the total updates. Nothing had to be filled down.</p>
+</div>
+
+<div class="drill" data-drill="order">
+  <p class="drill-q">Put the conversion in order, from a raw pasted range to a working
+  Table.</p>
+  <ul class="seq">
+    <li><button class="opt" data-pos="2">Click any cell inside the data and press Ctrl and T</button></li>
+    <li><button class="opt" data-pos="1">Remove merged cells and give every column one clear heading</button></li>
+    <li><button class="opt" data-pos="4">Write the calculated column once using the @ row reference</button></li>
+    <li><button class="opt" data-pos="3">Rename the Table from Table1 to something that means something</button></li>
+  </ul>
+  <p class="feedback"></p>
+  <button class="drill-reset">Reset</button>
+</div>
+
+<div class="ask">
+  <p><strong>Ask your teacher.</strong> Good questions here: what to do when your source
+  data has two header rows, whether to convert a Table back to a range and how, or why
+  your calculated column shows a small warning triangle.</p>
+</div>
+
+<div class="callout">
+  <p class="kicker">Read this next</p>
+  <p>Microsoft, <a href="https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c">Overview
+  of Excel tables</a>. It is short, and it is the authoritative statement of what a Table
+  is. Read the sections on calculated columns and structured references.</p>
+  <p>Then go to <a href="0004-answering-questions.html">lesson 4</a>, which finally asks
+  the data a question: how much did the North region sell?</p>
+</div>
+
+<div class="footer">
+  <h3>References</h3>
+  <p>Microsoft, <a href="https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c">Overview
+  of Excel tables</a>, checked 2026-08-14. Full annotations in
+  <a href="../RESOURCES.md">RESOURCES.md</a>.</p>
+  <p>Tables work the same in every Excel version from 2016 onward, on Windows and on Mac.
+  The <em>Table Design</em> tab is called <em>Table</em> on some Mac builds.</p>
+  <p class="nav">
+    <a href="0002-the-dollar-sign.html">Previous</a>
+    <a href="0004-answering-questions.html">Next lesson</a>
+    <a href="../reference/0000-course-roadmap.html">Roadmap</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+    <a href="../RESOURCES.md">Resources</a>
+  </p>
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

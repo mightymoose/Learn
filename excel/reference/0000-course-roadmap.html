@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excel &middot; Course Roadmap</title>
+<meta name="learn:subject" content="Excel">
+<meta name="learn:type" content="reference">
+<meta name="learn:source" content="Microsoft, Excel help and learning">
+<meta name="learn:section" content="Tier 0 &middot; Start here">
+<meta name="learn:order" content="0.00">
+<meta name="learn:status" content="current">
+<meta name="learn:tags" content="roadmap, curriculum, start here, beginner to expert, tiers, syllabus">
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Start here &middot; Excel</p>
+  <h1>Course roadmap</h1>
+  <p class="standfirst">Twenty lessons in four tiers, beginner to expert. Tier 1 is
+  written. Open this page first, then work down.</p>
+</header>
+
+<div class="win">
+  <p class="kicker">How to use this page</p>
+  <p>Take the tiers in order. Each one assumes the one before it, so this is a dependency
+  chain, not a menu. Do one lesson in a sitting, then leave it. Come back two days later
+  and try the recall questions before rereading anything. That gap is where the learning
+  actually happens.</p>
+</div>
+
+<h2>Tier 1 &middot; Foundations</h2>
+
+<p>What every later tier assumes. Nothing here depends on which Excel you have.</p>
+
+<div class="tier done">
+  <h3>Written and ready</h3>
+  <ol>
+    <li><a href="../lessons/0001-formulas-not-numbers.html">Formulas, not numbers</a><span class="written">Written</span><br>
+    Cell addresses, the formula bar, and why a typed number goes stale.</li>
+    <li><a href="../lessons/0002-the-dollar-sign.html">The dollar sign</a><span class="written">Written</span><br>
+    Relative, absolute and mixed references. Fill one formula across a block correctly.</li>
+    <li><a href="../lessons/0003-tables.html">Tables</a><span class="written">Written</span><br>
+    Structured references and calculated columns. Data that knows how big it is.</li>
+    <li><a href="../lessons/0004-answering-questions.html">Answering questions</a><span class="written">Written</span><br>
+    SUMIFS, COUNTIFS, AVERAGEIFS, and a summary block that checks itself.</li>
+  </ol>
+</div>
+
+<h2>Tier 2 &middot; Working analyst</h2>
+
+<p>Where a spreadsheet stops being a list and starts being an answer. This tier is where
+Excel versions start to differ, so lesson 5 waits on one question. See
+<a href="#versions">which Excel do you have</a> below.</p>
+
+<div class="tier">
+  <h3>Planned</h3>
+  <ol start="5">
+    <li>Lookups: pulling a value out of another table<span class="planned">Planned</span><br>
+    XLOOKUP if you have it, INDEX and MATCH if you do not. Both taught the same way.</li>
+    <li>Logic: IF, IFS and catching errors<span class="planned">Planned</span><br>
+    Branching without nesting six levels deep. IFERROR, and when hiding an error is wrong.</li>
+    <li>Text and dates that arrive dirty<span class="planned">Planned</span><br>
+    TRIM, TEXT, DATE and the reason a date sometimes shows as 45000.</li>
+    <li>PivotTables<span class="planned">Planned</span><br>
+    Summarising thousands of rows by dragging. What they do well, and what they hide.</li>
+    <li>Charts that do not mislead<span class="planned">Planned</span><br>
+    Picking the right form, and the axis choices that quietly lie.</li>
+    <li>Validation and conditional formatting<span class="planned">Planned</span><br>
+    Stopping bad data going in, and making the important number visible.</li>
+  </ol>
+</div>
+
+<h2>Tier 3 &middot; Building models</h2>
+
+<p>The shift from answering one question to building something other people rely on.</p>
+
+<div class="tier">
+  <h3>Planned</h3>
+  <ol start="11">
+    <li>Dynamic arrays<span class="planned">Planned</span><br>
+    FILTER, SORT, UNIQUE and SEQUENCE. One formula that returns many cells.</li>
+    <li>Model layout: inputs, calculations, outputs<span class="planned">Planned</span><br>
+    Where to put things so a stranger can follow. Named ranges, and the one-sheet rule.</li>
+    <li>Auditing a workbook you did not write<span class="planned">Planned</span><br>
+    Trace precedents, evaluate formula, and finding the number that is quietly hardcoded.</li>
+    <li>Scenarios and solving backwards<span class="planned">Planned</span><br>
+    Goal Seek, data tables, and Solver. Asking what input gives this answer.</li>
+  </ol>
+</div>
+
+<h2>Tier 4 &middot; Expert</h2>
+
+<p>The tools most Excel users never reach. This tier is where the ceiling actually is.
+Some of it is Windows only.</p>
+
+<div class="tier">
+  <h3>Planned</h3>
+  <ol start="15">
+    <li>Power Query: import and reshape<span class="planned">Planned</span><br>
+    Load, clean, unpivot and merge, once, then refresh forever. The biggest single win here.</li>
+    <li>The data model, Power Pivot and DAX<span class="planned">Planned</span><br>
+    Relationships between tables, and measures. Windows only.</li>
+    <li>LAMBDA and LET<span class="planned">Planned</span><br>
+    Writing your own reusable functions without leaving the formula bar. Microsoft 365 only.</li>
+    <li>Automation<span class="planned">Planned</span><br>
+    Office Scripts, VBA and Python in Excel. Which to reach for, and when not to.</li>
+    <li>Performance and the calculation engine<span class="planned">Planned</span><br>
+    Why a workbook goes slow. Volatile functions, whole-column references, calculation order.</li>
+    <li>Sharing, protecting and governing<span class="planned">Planned</span><br>
+    Locking inputs, versioning, and knowing when the answer is a real database.</li>
+  </ol>
+</div>
+
+<h2 id="versions">Which Excel do you have?</h2>
+
+<p>This decides how tier 2 onward gets written, so it is worth two minutes. In Excel, go
+to <em>File</em> then <em>Account</em> on Windows, or <em>Excel</em> then <em>About
+Excel</em> on a Mac. Tell your teacher what it says, and whether you are on Windows or
+Mac.</p>
+
+<table class="wide">
+  <thead>
+    <tr><th>Feature</th><th>Microsoft 365, 2021, 2024</th><th>Excel 2016, 2019</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>XLOOKUP</td><td>Yes</td><td>No, INDEX and MATCH instead</td></tr>
+    <tr><td>FILTER, SORT, UNIQUE</td><td>Yes</td><td>No, helper columns instead</td></tr>
+    <tr><td>LAMBDA and LET</td><td>365 only</td><td>No</td></tr>
+    <tr><td>Power Query</td><td>Built in</td><td>2016 needs an add-in</td></tr>
+    <tr><td>Power Pivot and DAX</td><td>Windows only</td><td>Windows only</td></tr>
+  </tbody>
+</table>
+
+<p>Version availability above comes from Microsoft's own function pages, for example the
+<a href="https://support.microsoft.com/en-us/office/xlookup-function-b7fd680e-6d10-43e6-84f9-88eae8bf5929">XLOOKUP
+reference</a>, checked 2026-08-14. Nothing in tier 1 depends on the answer, which is why
+tier 1 could be written first.</p>
+
+<h2>Reference cards</h2>
+
+<p>These are the compressed version. Lessons are read once. Cards are kept.</p>
+
+<ul>
+  <li><a href="cell-references.html">Cell references</a>, one page on the dollar sign.</li>
+  <li><a href="aggregation.html">Aggregation</a>, one page on SUMIFS and its family.</li>
+</ul>
+
+<div class="ask">
+  <p><strong>Ask your teacher.</strong> This course has a teacher attached, not just
+  pages. If a lesson does not land, say so in chat and it gets reworked. If your real
+  problem is not on this ladder at all, say that too. The ladder should follow your work,
+  not the other way round.</p>
+</div>
+
+<div class="footer">
+  <h3>About this course</h3>
+  <p>The reason behind the course is in <a href="../MISSION.md">MISSION.md</a>, and it is
+  currently marked provisional, because the learner was not in the room when it was
+  written. Correcting it is the highest-value thing that can happen next. Sources are in
+  <a href="../RESOURCES.md">RESOURCES.md</a>, every one checked on 2026-08-14. Working
+  notes and conventions are in <a href="../NOTES.md">NOTES.md</a>.</p>
+  <p class="nav">
+    <a href="../lessons/0001-formulas-not-numbers.html">Start lesson 1</a>
+    <a href="../MISSION.md">Mission</a>
+    <a href="../RESOURCES.md">Resources</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+  </p>
+</div>
+
+</body>
+</html>

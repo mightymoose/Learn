@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference &middot; Cell References</title>
+<meta name="learn:subject" content="Excel">
+<meta name="learn:type" content="reference">
+<meta name="learn:source" content="Microsoft, Excel help and learning">
+<meta name="learn:section" content="Tier 1 &middot; Foundations">
+<meta name="learn:order" content="1.02">
+<meta name="learn:status" content="current">
+<meta name="learn:tags" content="absolute reference, relative reference, mixed reference, F4, structured reference, fill">
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Reference card &middot; Tier 1</p>
+  <h1>Cell references</h1>
+  <p class="standfirst">One page. Print it. Everything here is used in
+  <a href="../lessons/0002-the-dollar-sign.html">lesson 2</a> onward.</p>
+</header>
+
+<h2>The four forms</h2>
+
+<p>A dollar sign locks whatever comes immediately after it. That is the whole rule.</p>
+
+<table>
+  <thead>
+    <tr><th>Form</th><th>Name</th><th>When you copy it</th><th>Use it for</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="fx">H1</span></td><td>Relative</td><td>Column and row both move</td><td>The normal case, row-by-row work</td></tr>
+    <tr><td><span class="fx">$H$1</span></td><td>Absolute</td><td>Nothing moves</td><td>A rate, a constant, one input cell</td></tr>
+    <tr><td><span class="fx">$H1</span></td><td>Mixed</td><td>Column stays, row moves</td><td>Filling across, reading down one column</td></tr>
+    <tr><td><span class="fx">H$1</span></td><td>Mixed</td><td>Row stays, column moves</td><td>Filling down, reading across one row</td></tr>
+  </tbody>
+</table>
+
+<h2>The test, applied to every reference</h2>
+
+<p>Ask the two halves separately, then put a dollar sign in front of every no.</p>
+
+<div class="step">
+  <p>As this formula gets copied, should the <strong>column letter</strong> change?</p>
+</div>
+<div class="step">
+  <p>As this formula gets copied, should the <strong>row number</strong> change?</p>
+</div>
+
+<h2>Keystroke</h2>
+
+<p>Put the cursor on a reference inside the formula bar, then press
+<span class="kbd">F4</span> to cycle the four forms.</p>
+
+<p class="fx fx-block">H1  &rarr;  $H$1  &rarr;  H$1  &rarr;  $H1  &rarr;  H1</p>
+
+<p>On many Macs this is <span class="kbd">Command</span> <span class="kbd">T</span>. On
+laptops with media keys you may need <span class="kbd">Fn</span>
+<span class="kbd">F4</span>.</p>
+
+<h2>Structured references, from Tables</h2>
+
+<p>Inside a Table these replace the forms above. They carry no row numbers, so they cannot
+break when data grows. See <a href="../lessons/0003-tables.html">lesson 3</a>.</p>
+
+<table>
+  <thead>
+    <tr><th>Form</th><th>Means</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="fx">Sales[Revenue]</span></td><td>The whole Revenue column, however long it gets</td></tr>
+    <tr><td><span class="fx">[@Units]</span></td><td>Units on this row, used inside the Table</td></tr>
+    <tr><td><span class="fx">Sales[#Headers]</span></td><td>The header row only</td></tr>
+    <tr><td><span class="fx">Sales[#Totals]</span></td><td>The total row only</td></tr>
+    <tr><td><span class="fx">Sales</span></td><td>The data body, no headers, no totals</td></tr>
+  </tbody>
+</table>
+
+<h2>Symptoms and causes</h2>
+
+<table>
+  <thead>
+    <tr><th>What you see</th><th>Almost always</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>First row right, all others zero</td><td>A reference that should be absolute is relative</td></tr>
+    <tr><td>Every row shows the same number</td><td>A reference that should be relative is absolute</td></tr>
+    <tr><td><span class="fx">#REF!</span></td><td>The referenced cell was deleted, not just emptied</td></tr>
+    <tr><td><span class="fx">#VALUE!</span></td><td>Arithmetic hit text, often a number stored as text</td></tr>
+    <tr><td><span class="fx">#####</span></td><td>Nothing is wrong. The column is too narrow</td></tr>
+    <tr><td>Formula shows as text</td><td>The leading equals sign is missing, or the cell is formatted as Text</td></tr>
+  </tbody>
+</table>
+
+<h2>Two habits worth keeping</h2>
+
+<p>Build the reference by clicking the cell rather than typing its address. It is faster
+and it cannot produce a typo that still calculates.</p>
+
+<p>When a filled column looks wrong, click a cell in the <em>middle</em> of it, never the
+first one. The first cell is right by construction, which is why the error hides there.</p>
+
+<div class="footer">
+  <h3>Source</h3>
+  <p>Microsoft, <a href="https://support.microsoft.com/en-us/excel">Excel help and
+  learning</a>, and <a href="https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c">Overview
+  of Excel tables</a> for the structured reference forms. Both checked 2026-08-14.
+  Nothing on this card depends on your Excel version.</p>
+  <p class="nav">
+    <a href="0000-course-roadmap.html">Roadmap</a>
+    <a href="../lessons/0002-the-dollar-sign.html">Lesson 2</a>
+    <a href="aggregation.html">Aggregation card</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+  </p>
+</div>
+
+</body>
+</html>

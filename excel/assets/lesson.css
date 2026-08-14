@@ -1,0 +1,471 @@
+/* lesson.css — shared stylesheet for the Excel teaching workspace.
+   Every lesson and reference card links this file. Edit here, not in a lesson.
+
+   Design target: Tufte-ish, matching the other subjects on this site. Long
+   measure, wide margin, prints clean. The tokens are the same as
+   algebra/assets/lesson.css on purpose, so the whole site reads as one course.
+
+   Excel-specific components live at the bottom: .grid renders a spreadsheet,
+   .fx renders a formula, .kbd renders a key. Use them. Do not inline a grid. */
+
+:root {
+  --ink: #111008;
+  --ink-soft: #4a4740;
+  --ink-faint: #6f6b62;
+  --paper: #fffef8;
+  --rule: #ddd9cc;
+  --accent: #1c5e34;
+  --accent-soft: #eaf1ea;
+  --good: #1c5e34;
+  --bad: #8a2018;
+  --grid-line: #cfcabb;
+  --grid-head: #f0ece1;
+  --measure: 36rem;
+  --wide: 46rem;
+  --serif: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --mono: "SF Mono", "IBM Plex Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #e8e4d9;
+    --ink-soft: #b3ada0;
+    --ink-faint: #8b857a;
+    --paper: #16150f;
+    --rule: #35322a;
+    --accent: #7fc79a;
+    --accent-soft: #1b241d;
+    --good: #7fc79a;
+    --bad: #e8907f;
+    --grid-line: #3d3a31;
+    --grid-head: #22201a;
+  }
+}
+
+html { font-size: 17px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 1.62;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+  max-width: 60rem;
+  counter-reset: step;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1.2rem;
+  margin-bottom: 2.5rem;
+  max-width: var(--measure);
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 0.6rem;
+}
+
+h1 {
+  font-size: 2.1rem;
+  line-height: 1.15;
+  font-weight: 400;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.standfirst {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0;
+  max-width: var(--measure);
+}
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin: 3rem 0 0.9rem;
+  max-width: var(--measure);
+  letter-spacing: -0.005em;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 2rem 0 0.6rem;
+  max-width: var(--measure);
+}
+
+p, ul, ol, blockquote, .box, .callout, table {
+  max-width: var(--measure);
+}
+
+p { margin: 0 0 1.1rem; }
+li { margin-bottom: 0.45rem; }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
+}
+
+strong { font-weight: 600; }
+
+/* ---------- the win banner: what you can do after this lesson ---------- */
+
+.win {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 1rem 1.2rem;
+  margin: 2rem 0;
+  max-width: var(--measure);
+}
+.win .kicker { margin-bottom: 0.35rem; }
+.win p:last-child { margin-bottom: 0; }
+
+/* ---------- quotation from a source ---------- */
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+}
+
+/* ---------- numbered steps ---------- */
+
+.step {
+  position: relative;
+  padding-left: 2.4rem;
+  margin-bottom: 1.3rem;
+  max-width: var(--measure);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 1.55rem;
+  height: 1.55rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+/* ---------- callout ---------- */
+
+.callout {
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  margin: 1.8rem 0;
+  background: transparent;
+}
+.callout p:last-child { margin-bottom: 0; }
+.callout .kicker { margin-bottom: 0.4rem; }
+
+/* ============================================================
+   Excel components. Shared, so no lesson has to inline one.
+   ============================================================ */
+
+/* ---------- .fx — a formula, inline or on its own line ----------
+   <span class="fx">=SUM(B2:B9)</span>
+   Use .fx-block for a formula that stands alone. */
+
+.fx {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--accent-soft);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.08em 0.35em;
+  white-space: nowrap;
+}
+
+.fx-block {
+  display: block;
+  white-space: pre-wrap;
+  max-width: var(--measure);
+  margin: 1.3rem 0;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  border-radius: 3px;
+}
+
+/* ---------- .kbd — a key or a shortcut ----------
+   Press <span class="kbd">F4</span>. */
+
+.kbd {
+  font-family: var(--mono);
+  font-size: 0.78em;
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  padding: 0.1em 0.4em;
+  background: var(--paper);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* ---------- .grid — a spreadsheet ----------
+   Wrap every grid in <div class="gridwrap"> so a wide one scrolls
+   rather than pushing the page sideways.
+
+   <div class="gridwrap">
+   <table class="grid">
+     <thead><tr><td class="corner"></td><th>A</th><th>B</th></tr></thead>
+     <tbody>
+       <tr><th class="rownum">1</th><td>Region</td><td>Sales</td></tr>
+       <tr><th class="rownum">2</th><td>North</td><td class="num">1200</td></tr>
+     </tbody>
+   </table>
+   </div>
+
+   Cell classes: .num right-aligns, .sel marks the selected cell,
+   .hl tints a range under discussion, .formula shows a live formula. */
+
+.gridwrap {
+  max-width: var(--wide);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+table.grid {
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  background: var(--paper);
+  max-width: none;
+  margin: 0;
+}
+
+table.grid th,
+table.grid td {
+  border: 1px solid var(--grid-line);
+  padding: 0.24rem 0.55rem;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-weight: 400;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+/* the grey column letters and row numbers */
+table.grid thead th,
+table.grid .rownum,
+table.grid .corner {
+  background: var(--grid-head);
+  color: var(--ink-faint);
+  text-align: center;
+  font-size: 0.7rem;
+  min-width: 1.9rem;
+}
+
+table.grid .num { text-align: right; }
+table.grid .hl { background: var(--accent-soft); }
+table.grid .sel { outline: 2px solid var(--accent); outline-offset: -2px; }
+table.grid .formula { color: var(--accent); }
+table.grid .head td,
+table.grid .head th:not(.rownum) { font-weight: 600; color: var(--ink); }
+
+.gridcap {
+  max-width: var(--wide);
+  margin: -0.9rem 0 1.7rem;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+
+/* ---------- .tiers — the roadmap ladder ---------- */
+
+.tier {
+  border-left: 3px solid var(--rule);
+  padding: 0.2rem 0 0.2rem 1.2rem;
+  margin: 1.8rem 0;
+  max-width: var(--measure);
+}
+.tier.done { border-left-color: var(--accent); }
+.tier h3 { margin-top: 0; }
+.tier ol { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+.tier li { margin-bottom: 0.5rem; }
+
+.written {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 2px;
+  padding: 0.05rem 0.35rem;
+  margin-left: 0.4rem;
+  white-space: nowrap;
+}
+.planned {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  color: var(--ink-faint);
+  border-radius: 2px;
+  padding: 0.05rem 0.35rem;
+  margin-left: 0.4rem;
+  white-space: nowrap;
+}
+
+/* ---------- interactive drills (behaviour lives in assets/quiz.js) ---------- */
+
+.drill {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.4rem 0;
+  margin: 2rem 0;
+  max-width: var(--measure);
+}
+
+.drill-q { font-weight: 600; margin-bottom: 0.9rem; }
+
+.opts { list-style: none; padding: 0; margin: 0; }
+
+.opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 0.97rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+.opt:hover:not([disabled]) { border-color: var(--ink-faint); }
+.opt[disabled] { cursor: default; }
+.opt.correct { border-color: var(--good); color: var(--good); }
+.opt.wrong { border-color: var(--bad); color: var(--bad); text-decoration: line-through; }
+.opt .fx { background: transparent; border: none; padding: 0; }
+
+.feedback {
+  margin-top: 0.7rem;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  min-height: 1.2rem;
+}
+.feedback.show { animation: fade 0.25s ease; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ordering drill */
+.seq { list-style: none; padding: 0; margin: 0 0 0.6rem; }
+.seq .opt { position: relative; padding-left: 2.4rem; }
+.seq .opt .slot {
+  position: absolute;
+  left: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+.seq .opt.placed { border-color: var(--good); color: var(--ink-faint); }
+
+.drill-reset {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.4rem;
+}
+
+/* ---------- reference-card tables ---------- */
+
+table { border-collapse: collapse; margin: 1.4rem 0; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 400; }
+
+table.wide { max-width: var(--wide); }
+
+/* ---------- footer ---------- */
+
+.footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding-top: 1.4rem;
+  max-width: var(--measure);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.footer h3 { margin-top: 0; }
+
+.ask {
+  border: 1px dashed var(--rule);
+  padding: 0.9rem 1.1rem;
+  margin: 1.6rem 0;
+  max-width: var(--measure);
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+}
+
+.nav { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; }
+.nav a { margin-right: 1.2rem; }
+
+/* ---------- print ---------- */
+
+@media print {
+  :root {
+    --ink: #000; --ink-soft: #333; --ink-faint: #555;
+    --paper: #fff; --rule: #bbb; --accent: #000; --accent-soft: #f2f2f2;
+    --good: #000; --bad: #000;
+    --grid-line: #999; --grid-head: #eee;
+  }
+  html { font-size: 11pt; }
+  body { padding: 0; max-width: none; }
+  a { color: #000; text-decoration: none; }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--mono);
+    font-size: 0.72em;
+    color: #555;
+    word-break: break-all;
+  }
+  .drill, .callout, .win, blockquote, table, .step, .gridwrap, .tier { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  .opt { border-color: #bbb; }
+  .gridwrap { overflow-x: visible; }
+  .drill-reset, .nav { display: none; }
+  .feedback::before { content: "answer: "; }
+}
