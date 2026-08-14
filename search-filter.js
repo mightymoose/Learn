@@ -29,14 +29,21 @@
       .toLowerCase();
   }
 
-  /* Filter by free-text query and a type. All query terms must match
-     (AND), each as a case-insensitive substring of any indexed field. */
-  function filterEntries(entries, query, type) {
+  /* Filter by free-text query, a type, and a subject. All query terms must
+     match (AND), each as a case-insensitive substring of any indexed field.
+     `subject` is optional, so three-argument callers keep working. */
+  function filterEntries(entries, query, type, subject) {
     var list = entries || [];
 
     if (type && type !== "all") {
       list = list.filter(function (e) {
         return e.type === type;
+      });
+    }
+
+    if (subject && subject !== "all") {
+      list = list.filter(function (e) {
+        return e.subject === subject;
       });
     }
 

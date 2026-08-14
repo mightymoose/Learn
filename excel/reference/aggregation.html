@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference &middot; Aggregation</title>
+<meta name="learn:subject" content="Excel">
+<meta name="learn:type" content="reference">
+<meta name="learn:source" content="Microsoft, Excel functions by category">
+<meta name="learn:section" content="Tier 1 &middot; Foundations">
+<meta name="learn:order" content="1.04">
+<meta name="learn:status" content="current">
+<meta name="learn:tags" content="SUMIFS, COUNTIFS, AVERAGEIFS, criteria, wildcards, aggregation, summary">
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Reference card &middot; Tier 1</p>
+  <h1>Aggregation</h1>
+  <p class="standfirst">One page. Print it. The argument order and the condition forms,
+  which are the two things people look up again and again.</p>
+</header>
+
+<h2>Plain totals</h2>
+
+<table>
+  <thead>
+    <tr><th>Formula</th><th>Returns</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="fx">=SUM(Sales[Revenue])</span></td><td>The total</td></tr>
+    <tr><td><span class="fx">=AVERAGE(Sales[Revenue])</span></td><td>The mean, ignoring empty cells</td></tr>
+    <tr><td><span class="fx">=COUNT(Sales[Units])</span></td><td>How many cells hold a number</td></tr>
+    <tr><td><span class="fx">=COUNTA(Sales[Rep])</span></td><td>How many cells are not empty, text included</td></tr>
+    <tr><td><span class="fx">=MAX(Sales[Revenue])</span></td><td>The largest value</td></tr>
+    <tr><td><span class="fx">=MIN(Sales[Revenue])</span></td><td>The smallest value</td></tr>
+  </tbody>
+</table>
+
+<p><span class="fx">COUNT</span> counts numbers. <span class="fx">COUNTA</span> counts
+anything. Getting a surprisingly low count is nearly always this.</p>
+
+<h2>Conditional totals</h2>
+
+<p>Argument order is the thing to get right. The range to add comes <strong>first</strong>,
+then condition pairs.</p>
+
+<p class="fx fx-block">=SUMIFS(add_this, test_this, must_equal, test_this_too, must_equal_too)</p>
+
+<table>
+  <thead>
+    <tr><th>Question</th><th>Formula</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Total for one region</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
+    <tr><td>How many rows match</td><td><span class="fx">=COUNTIFS(Sales[Region], H11)</span></td></tr>
+    <tr><td>Average of matching rows</td><td><span class="fx">=AVERAGEIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
+    <tr><td>Largest matching value</td><td><span class="fx">=MAXIFS(Sales[Revenue], Sales[Region], H11)</span></td></tr>
+    <tr><td>Two conditions at once</td><td><span class="fx">=SUMIFS(Sales[Revenue], Sales[Region], H11, Sales[Price], 4.5)</span></td></tr>
+  </tbody>
+</table>
+
+<p><span class="fx">COUNTIFS</span> has nothing to add up, so it starts straight in on
+condition pairs. Every other function in the family takes its range first.</p>
+
+<div class="callout">
+  <p class="kicker">Use the S</p>
+  <p>The older <span class="fx">SUMIF</span> and <span class="fx">AVERAGEIF</span>, with
+  no S, take their arguments in the opposite order. Use the S versions always, even for
+  one condition. One argument order is easier to remember than two.</p>
+</div>
+
+<h2>Condition forms</h2>
+
+<p>A condition is not limited to an exact match. Comparisons and wildcards go in quotes.</p>
+
+<table>
+  <thead>
+    <tr><th>Condition</th><th>Matches</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="fx">H11</span></td><td>Whatever that cell holds. The preferred form</td></tr>
+    <tr><td><span class="fx">"North"</span></td><td>Exactly North. Case is ignored</td></tr>
+    <tr><td><span class="fx">"&gt;500"</span></td><td>Greater than 500</td></tr>
+    <tr><td><span class="fx">"&gt;="&amp;H11</span></td><td>At least the value in H11. Note the ampersand</td></tr>
+    <tr><td><span class="fx">"&lt;&gt;North"</span></td><td>Anything except North</td></tr>
+    <tr><td><span class="fx">"N*"</span></td><td>Starts with N. The star means any characters</td></tr>
+    <tr><td><span class="fx">"?????"</span></td><td>Exactly five characters. Each mark is one character</td></tr>
+    <tr><td><span class="fx">""</span></td><td>Empty cells</td></tr>
+  </tbody>
+</table>
+
+<p>The ampersand form is the one people get wrong. A comparison built from a cell has to
+be glued together as text, so it is <span class="fx">"&gt;="&amp;H11</span> and never
+<span class="fx">"&gt;=H11"</span>, which looks for the literal characters.</p>
+
+<h2>When a total comes out zero</h2>
+
+<table>
+  <thead>
+    <tr><th>Check</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Trailing spaces in the data</td><td>"North " does not equal "North". Use TRIM</td></tr>
+    <tr><td>Numbers stored as text</td><td>They sit left in the cell and match nothing numeric</td></tr>
+    <tr><td>The two ranges differ in length</td><td>SUMIFS needs matching shapes and errors otherwise</td></tr>
+    <tr><td>The criteria cell is empty</td><td>An empty criteria matches nothing, silently</td></tr>
+    <tr><td>You swapped the first two ranges</td><td>The SUMIF and SUMIFS argument order trap</td></tr>
+  </tbody>
+</table>
+
+<h2>Always add the check</h2>
+
+<p>Put this in a spare cell beside any summary block. It should read zero forever.</p>
+
+<p class="fx fx-block">=SUM(I11:I13)-SUM(Sales[Revenue])</p>
+
+<p>If the parts stop adding up to the whole, a category is missing or misspelled. A
+summary that cannot be checked is a summary nobody should trust, yours included.</p>
+
+<div class="footer">
+  <h3>Source</h3>
+  <p>Microsoft, <a href="https://support.microsoft.com/en-us/office/excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb">Excel
+  functions by category</a>, checked 2026-08-14. Worked examples for each function at
+  <a href="https://exceljet.net/functions">Exceljet</a>, checked the same day.</p>
+  <p>Every function on this card except <span class="fx">MAXIFS</span> exists in all Excel
+  versions this course supports. <span class="fx">MAXIFS</span> needs Excel 2019 or later.</p>
+  <p class="nav">
+    <a href="0000-course-roadmap.html">Roadmap</a>
+    <a href="../lessons/0004-answering-questions.html">Lesson 4</a>
+    <a href="cell-references.html">References card</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+  </p>
+</div>
+
+</body>
+</html>

@@ -46,10 +46,39 @@ check("matches a tag not in the title",
   filterEntries(entries, "almost all", "all").length >= 1);
 check("matches the section field",
   filterEntries(entries, "§1", "all").length >= 1);
+// "lang" appears in the source field of the Lang pages and nowhere else.
+// Assert every one of them comes back, not that every page in the repo does:
+// that older form only held while Algebra was the only subject.
+const langSourced = entries.filter((e) => /lang/i.test(e.source || ""));
+const langFound = filterEntries(entries, "lang", "all").map((e) => e.path);
 check("matches the source field",
-  filterEntries(entries, "lang", "all").length === entries.length);
+  langSourced.length >= 1 && langSourced.every((e) => langFound.includes(e.path)),
+  langSourced.length + " page(s) sourced from Lang, all returned");
 check("no match returns empty",
   filterEntries(entries, "zzzznotathing", "all").length === 0);
+
+console.log("\nSubject filter:");
+const allSubjects = [...new Set(entries.map((e) => e.subject))];
+check("more than one subject to filter", allSubjects.length >= 2, allSubjects.join(", "));
+allSubjects.forEach((s) => {
+  const only = filterEntries(entries, "", "all", s);
+  check("only " + s + " comes back",
+    only.length >= 1 && only.every((e) => e.subject === s), only.length);
+});
+check("the subjects partition the index",
+  allSubjects.reduce((n, s) => n + filterEntries(entries, "", "all", s).length, 0) === entries.length);
+check("\"all\" is the same as no subject filter",
+  filterEntries(entries, "", "all", "all").length === entries.length);
+check("omitting the argument returns everything",
+  filterEntries(entries, "", "all").length === entries.length);
+check("an unknown subject returns nothing",
+  filterEntries(entries, "", "all", "Nosuchsubject").length === 0);
+check("subject combines with a query",
+  filterEntries(entries, "monoid", "all", "Algebra").length ===
+    filterEntries(entries, "monoid", "all").length);
+check("subject combines with a type",
+  filterEntries(entries, "", "lesson", allSubjects[0])
+    .every((e) => e.type === "lesson" && e.subject === allSubjects[0]));
 
 console.log("\nMulti-term is AND, not OR:");
 const both = filterEntries(entries, "monoid powers", "all");

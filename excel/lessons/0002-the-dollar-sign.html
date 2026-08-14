@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 02 &middot; The Dollar Sign</title>
+<meta name="learn:subject" content="Excel">
+<meta name="learn:type" content="lesson">
+<meta name="learn:source" content="Microsoft, Excel help and learning">
+<meta name="learn:section" content="Tier 1 &middot; Foundations">
+<meta name="learn:order" content="1.02">
+<meta name="learn:status" content="current">
+<meta name="learn:tags" content="absolute reference, relative reference, mixed reference, fill down, F4, beginner">
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Lesson 02 &middot; Tier 1, Foundations</p>
+  <h1>The dollar sign</h1>
+  <p class="standfirst">Write a formula once and fill it down a thousand rows. One
+  character decides whether that works or quietly produces nonsense.</p>
+</header>
+
+<div class="win">
+  <p class="kicker">After this lesson</p>
+  <p>You can write a single formula, copy it across a whole block, and get the right
+  answer in every cell. You can also look at a broken column of numbers and say which
+  reference should have been locked.</p>
+</div>
+
+<h2>Copying a formula moves its references</h2>
+
+<p>First, set <span class="fx">C2</span> back to 120, so the data matches
+<a href="0001-formulas-not-numbers.html">lesson 1</a> again.</p>
+
+<p>In <span class="fx">E2</span> you have <span class="fx">=C2*D2</span>. Copy that cell
+and paste it into <span class="fx">E3</span>. Look at the formula bar. It does not say
+<span class="fx">=C2*D2</span>. It says <span class="fx">=C3*D3</span>.</p>
+
+<p>Excel did not copy the text. It copied the <em>relationship</em>. Your formula meant
+<em>two cells to my left, multiplied</em>, and that is what moved down with it.</p>
+
+<p>This is called a <strong>relative reference</strong>, and it is the default. It is also
+the reason you can write one formula and fill a column. Grab the small square at the
+bottom right corner of the cell and drag it down, or select the cell and press
+<span class="kbd">Ctrl</span> <span class="kbd">D</span> after selecting the range below
+it.</p>
+
+<div class="gridwrap">
+<table class="grid">
+  <thead>
+    <tr><td class="corner"></td><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th></tr>
+  </thead>
+  <tbody>
+    <tr class="head"><th class="rownum">1</th><td>Region</td><td>Rep</td><td>Units</td><td>Price</td><td>Revenue</td><td>Commission</td><td></td><td class="plain">Comm rate</td><td class="num hl plain">0.08</td></tr>
+    <tr><th class="rownum">2</th><td>North</td><td>Ana</td><td class="num">120</td><td class="num">4.50</td><td class="num">540.00</td><td class="num">43.20</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">3</th><td>South</td><td>Ben</td><td class="num">80</td><td class="num">4.50</td><td class="num">360.00</td><td class="num">28.80</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">4</th><td>North</td><td>Cara</td><td class="num">200</td><td class="num">3.75</td><td class="num">750.00</td><td class="num">60.00</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">5</th><td>East</td><td>Dan</td><td class="num">150</td><td class="num">3.75</td><td class="num">562.50</td><td class="num">45.00</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">6</th><td>South</td><td>Eve</td><td class="num">95</td><td class="num">4.50</td><td class="num">427.50</td><td class="num">34.20</td><td></td><td></td><td></td></tr>
+    <tr><th class="rownum">7</th><td>East</td><td>Finn</td><td class="num">210</td><td class="num">3.75</td><td class="num">787.50</td><td class="num">63.00</td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="gridcap">The commission rate sits in <span class="fx">I1</span>, tinted above.
+One cell, one rate, referred to by all six rows. Column G is deliberately left empty, for
+a reason that matters in <a href="0003-tables.html">lesson 3</a>.</p>
+
+<h2>Sometimes moving is exactly wrong</h2>
+
+<p>Now add commission. The rate is 8 percent. Following the rule from lesson 1, the rate
+goes in its own cell rather than inside a formula.</p>
+
+<p><strong>Skip column G and leave it completely empty.</strong> Put the label in
+<span class="fx">H1</span> and the number <span class="fx">0.08</span> in
+<span class="fx">I1</span>. That empty column looks like wasted space and it is not. Excel
+works out where a block of data ends by looking for a fully blank row or column, so the
+gap is what tells it your data stops at column F. Lesson 3 depends on it entirely.</p>
+
+<p>In <span class="fx">F2</span>, the obvious formula is this.</p>
+
+<p class="fx fx-block">=E2*I1</p>
+
+<p>It gives 43.20, which is right. Fill it down to <span class="fx">F7</span> and the
+column falls apart. F3 shows 0. So do F4 through F7.</p>
+
+<p>Click <span class="fx">F3</span> and read the formula bar. It says
+<span class="fx">=E3*I2</span>. The revenue reference moved down correctly. The rate
+reference moved down too, and <span class="fx">I2</span> is empty. Multiplying by an empty
+cell gives zero.</p>
+
+<p>Both references moved, because both were relative. You wanted only one of them to.</p>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">You wrote <span class="fx">=E2*I1</span> in F2 and filled it down to
+  F7. Every row below the first shows zero. Why?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true" data-why="Exactly. Both references were relative, so both slid. The rate slid off its own cell into empty ones.">The rate reference slides down to I2, I3 and returns zero</button></li>
+    <li><button class="opt" data-correct="false" data-why="The revenue reference is the one that behaved correctly. It moved with the rows, which is what you wanted.">The revenue reference stops moving and every row repeats row two</button></li>
+    <li><button class="opt" data-correct="false" data-why="No error appears, and that is the danger. Zero looks like a real answer in a way that #REF never does.">The formula breaks and every cell in the column shows #REF</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>The dollar sign pins a reference</h2>
+
+<p>A dollar sign locks whatever comes immediately after it. That is the entire rule.</p>
+
+<table>
+  <thead>
+    <tr><th>Form</th><th>Name</th><th>What moves when you copy it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="fx">I1</span></td><td>Relative</td><td>Both the column and the row move</td></tr>
+    <tr><td><span class="fx">$I$1</span></td><td>Absolute</td><td>Nothing moves. It always points at I1</td></tr>
+    <tr><td><span class="fx">$I1</span></td><td>Mixed</td><td>Column stays I, row moves</td></tr>
+    <tr><td><span class="fx">I$1</span></td><td>Mixed</td><td>Row stays 1, column moves</td></tr>
+  </tbody>
+</table>
+
+<p>So the commission formula should be this.</p>
+
+<p class="fx fx-block">=E2*$I$1</p>
+
+<p>Fill that down and every row is right, because <span class="fx">$I$1</span> refuses to
+move while <span class="fx">E2</span> happily does.</p>
+
+<div class="callout">
+  <p class="kicker">The keystroke</p>
+  <p>You do not have to type dollar signs. Click into the formula, put the cursor on a
+  reference, and press <span class="kbd">F4</span>. It cycles
+  <span class="fx">I1</span>, <span class="fx">$I$1</span>, <span class="fx">I$1</span>,
+  <span class="fx">$I1</span> and back. On many Macs this is
+  <span class="kbd">Command</span> <span class="kbd">T</span>, and on some laptops you
+  need <span class="kbd">Fn</span> <span class="kbd">F4</span>.</p>
+</div>
+
+<h2>When you only want to lock half</h2>
+
+<p>Full locking with <span class="fx">$H$1</span> covers most beginner cases. The mixed
+forms matter the moment you fill a formula both down <em>and</em> across, which is what a
+grid of rates or a multiplication table needs.</p>
+
+<p>The test is simple. Ask each part of the reference separately: as this formula moves,
+should the column letter change? Should the row number change? Put a dollar sign in front
+of each answer that is no.</p>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">You need a reference that always points at column B, but moves down
+  the rows as you fill. Which form is it?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true" data-why="Right. The dollar sits before the B, so the column is pinned and the row is free to move.">$B2, because the dollar sign locks whatever comes right after it</button></li>
+    <li><button class="opt" data-correct="false" data-why="That form pins the row and frees the column, which is the opposite of what was asked for here.">B$2, because the dollar sign locks whatever comes right before it</button></li>
+    <li><button class="opt" data-correct="false" data-why="Locking both stops the row moving, so every filled cell would read the same one cell forever.">$B$2, because locking both parts is always the safest option here</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>Do this now</h2>
+
+<div class="step">
+  <p>Set <span class="fx">C2</span> back to 120. Leave column G empty. Put
+  <span class="fx">Comm rate</span> in H1 and <span class="fx">0.08</span> in I1.</p>
+</div>
+<div class="step">
+  <p>In <span class="fx">F2</span> type <span class="fx">=E2*I1</span>. Fill it down to
+  F7 and look at the zeros. See the failure once, deliberately.</p>
+</div>
+<div class="step">
+  <p>Click <span class="fx">F2</span>, click on <span class="fx">I1</span> in the formula
+  bar, press <span class="kbd">F4</span>. Press <span class="kbd">Enter</span>. Fill down
+  again. All six rows are now right.</p>
+</div>
+<div class="step">
+  <p>Change I1 to <span class="fx">0.10</span>. All six commissions update at once. That
+  is what the whole lesson bought you.</p>
+</div>
+<div class="step">
+  <p>Check that column G is still completely empty, with nothing at all in it. Lesson 3
+  will not work properly if anything has crept into it.</p>
+</div>
+
+<div class="drill" data-drill="order">
+  <p class="drill-q">A filled column is giving wrong answers. Put the diagnosis in order.</p>
+  <ul class="seq">
+    <li><button class="opt" data-pos="2">Read the formula bar and compare it with the formula in the first row</button></li>
+    <li><button class="opt" data-pos="1">Click a cell that is wrong, not the first cell of the column</button></li>
+    <li><button class="opt" data-pos="4">Add a dollar sign to that part, then fill the column again</button></li>
+    <li><button class="opt" data-pos="3">Find the reference that moved when it should have stayed still</button></li>
+  </ul>
+  <p class="feedback"></p>
+  <button class="drill-reset">Reset</button>
+</div>
+
+<div class="ask">
+  <p><strong>Ask your teacher.</strong> Good questions here: when a mixed reference is
+  genuinely needed, why <span class="kbd">F4</span> does nothing on your keyboard, or what
+  happens to a dollar-signed reference when somebody inserts a row above it.</p>
+</div>
+
+<div class="callout">
+  <p class="kicker">Read this next</p>
+  <p>Keep the <a href="../reference/cell-references.html">reference card on cell
+  references</a> next to you for a week. It is one page and it is designed to be printed.</p>
+  <p>Then go to <a href="0003-tables.html">lesson 3</a>. Filling formulas down is still
+  manual work, and somebody is going to add 500 rows to your data. Lesson 3 is the fix.</p>
+</div>
+
+<div class="footer">
+  <h3>References</h3>
+  <p>Microsoft, <a href="https://support.microsoft.com/en-us/excel">Excel help and
+  learning</a>, checked 2026-08-14. Full annotations in
+  <a href="../RESOURCES.md">RESOURCES.md</a>.</p>
+  <p>Nothing in this lesson depends on your Excel version. The
+  <span class="kbd">F4</span> shortcut differs by keyboard, not by version.</p>
+  <p class="nav">
+    <a href="0001-formulas-not-numbers.html">Previous</a>
+    <a href="0003-tables.html">Next lesson</a>
+    <a href="../reference/cell-references.html">Reference card</a>
+    <a href="../reference/0000-course-roadmap.html">Roadmap</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+  </p>
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

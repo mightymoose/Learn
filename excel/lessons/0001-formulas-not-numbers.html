@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 01 &middot; Formulas, Not Numbers</title>
+<meta name="learn:subject" content="Excel">
+<meta name="learn:type" content="lesson">
+<meta name="learn:source" content="Microsoft, Excel help and learning">
+<meta name="learn:section" content="Tier 1 &middot; Foundations">
+<meta name="learn:order" content="1.01">
+<meta name="learn:status" content="current">
+<meta name="learn:tags" content="formula, cell reference, formula bar, recalculation, operator precedence, beginner">
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Lesson 01 &middot; Tier 1, Foundations</p>
+  <h1>Formulas, not numbers</h1>
+  <p class="standfirst">The one habit that separates a spreadsheet from a calculator. Type
+  the address of a number, never the number itself.</p>
+</header>
+
+<div class="win">
+  <p class="kicker">After this lesson</p>
+  <p>You can write a formula that refers to other cells, explain why the cell and the
+  formula bar show different things, and change one input and watch every answer update
+  by itself.</p>
+</div>
+
+<h2>The grid is a set of addresses</h2>
+
+<p>A worksheet is a grid. Columns have letters across the top, rows have numbers down the
+side. Every cell has an address made of the two: column letter first, then row number.
+The cell where column C meets row 2 is called <span class="fx">C2</span>.</p>
+
+<p>That address is the whole idea. It gives you a way to say <em>the number that lives
+there</em> without saying what the number is.</p>
+
+<p>Here is the data this whole tier uses. Six sales reps, three regions. Open a blank
+workbook and type it in now. Typing it yourself takes two minutes and it is worth it,
+because every later lesson refers back to it.</p>
+
+<div class="gridwrap">
+<table class="grid">
+  <thead>
+    <tr><td class="corner"></td><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+  </thead>
+  <tbody>
+    <tr class="head"><th class="rownum">1</th><td>Region</td><td>Rep</td><td>Units</td><td>Price</td></tr>
+    <tr><th class="rownum">2</th><td>North</td><td>Ana</td><td class="num">120</td><td class="num">4.50</td></tr>
+    <tr><th class="rownum">3</th><td>South</td><td>Ben</td><td class="num">80</td><td class="num">4.50</td></tr>
+    <tr><th class="rownum">4</th><td>North</td><td>Cara</td><td class="num">200</td><td class="num">3.75</td></tr>
+    <tr><th class="rownum">5</th><td>East</td><td>Dan</td><td class="num">150</td><td class="num">3.75</td></tr>
+    <tr><th class="rownum">6</th><td>South</td><td>Eve</td><td class="num">95</td><td class="num">4.50</td></tr>
+    <tr><th class="rownum">7</th><td>East</td><td>Finn</td><td class="num">210</td><td class="num">3.75</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="gridcap">The tier 1 dataset. Row 1 holds the headings. The data runs from row 2
+to row 7.</p>
+
+<h2>An equals sign changes everything</h2>
+
+<p>Type <span class="fx">540</span> into a cell and Excel stores the number 540. Type
+<span class="fx">=120*4.5</span> and Excel stores an instruction, works it out, and shows
+you 540.</p>
+
+<p>The leading <span class="fx">=</span> is what makes the difference. It tells Excel the
+rest is a formula, not text. Without it you get the literal characters back.</p>
+
+<p>Now the important version. Click cell <span class="fx">E2</span> and type this.</p>
+
+<p class="fx fx-block">=C2*D2</p>
+
+<p>Press <span class="kbd">Enter</span>. You get 540 again. It looks like the same answer,
+and it is not the same thing at all.</p>
+
+<h3>The cell shows the answer, the formula bar shows the work</h3>
+
+<p>Click on <span class="fx">E2</span> once. The cell still reads 540. Look at the long
+white strip above the column letters, the <strong>formula bar</strong>. It reads
+<span class="fx">=C2*D2</span>.</p>
+
+<p>This trips up every beginner exactly once. The grid shows you results. The formula bar
+shows you what produced them. When you open somebody else's workbook and a number looks
+wrong, this is where you look first.</p>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">Cell E2 contains <span class="fx">=C2*D2</span>. What does the cell
+  itself show, and what does the formula bar show?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="true" data-why="Right. The grid is for reading answers, the formula bar is for reading the work behind them.">The cell shows the result, the formula bar shows the formula</button></li>
+    <li><button class="opt" data-correct="false" data-why="Backwards. If the grid showed formulas you could never read a report. Excel hides the work and shows the answer.">The cell shows the formula, the formula bar shows the result</button></li>
+    <li><button class="opt" data-correct="false" data-why="Then nothing would ever reveal the formula, and you could not audit a workbook at all. The bar shows the formula.">The cell shows the result, the formula bar shows the result</button></li>
+    <li><button class="opt" data-correct="false" data-why="That is what happens if you press Ctrl and grave accent, which is a display toggle. It is not the normal state.">The cell shows the formula, the formula bar shows the formula</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>Why the reference matters more than the answer</h2>
+
+<p>Both <span class="fx">=120*4.5</span> and <span class="fx">=C2*D2</span> give 540
+today. Now change Ana's units. Click <span class="fx">C2</span> and type 150.</p>
+
+<p>The formula holding <span class="fx">C2*D2</span> becomes 675 on its own. The formula
+holding <span class="fx">120*4.5</span> still says 540, and it is now wrong. It is wrong
+silently, with no error and no colour, which is the worst way for a number to be wrong.</p>
+
+<p>A typed number is a copy. A reference is a live link. Excel keeps track of which cells
+feed which formulas and recalculates the ones that need it, every time anything
+changes.</p>
+
+<div class="callout">
+  <p class="kicker">The rule</p>
+  <p>If a number could ever change, it belongs in its own cell, and every formula points
+  at that cell. Numbers buried inside formulas are the single most common reason a
+  spreadsheet quietly goes wrong.</p>
+</div>
+
+<div class="drill" data-drill="choice">
+  <p class="drill-q">You typed <span class="fx">=120*4.5</span> into a cell. Ana's units
+  then change from 120 to 150. What happens to your cell?</p>
+  <ul class="opts">
+    <li><button class="opt" data-correct="false" data-why="It would update if it held a reference. It holds two typed numbers, so it has no idea Ana exists.">It recalculates, because the formula contains a reference not a number</button></li>
+    <li><button class="opt" data-correct="true" data-why="Correct, and note that nothing warns you. The number is simply stale from now on.">Nothing changes, because the formula contains a number not a reference</button></li>
+    <li><button class="opt" data-correct="false" data-why="Excel recalculates constantly, not on reopen. Recalculation is not the problem here. The typed number is.">Nothing changes, because Excel only recalculates a formula on file reopen</button></li>
+  </ul>
+  <p class="feedback"></p>
+</div>
+
+<h2>Excel does not read left to right</h2>
+
+<p>One more thing before you practise. Excel applies operators in a fixed order, not in
+reading order. Brackets first, then exponents, then multiply and divide, then add and
+subtract.</p>
+
+<p>So <span class="fx">=2+3*4</span> is 14, not 20. If you meant 20, you have to say
+so.</p>
+
+<p class="fx fx-block">=(2+3)*4</p>
+
+<p>This bites hardest with averages and percentages. When a formula mixes
+<span class="fx">+</span> with <span class="fx">*</span> or <span class="fx">/</span>, add
+the brackets even when they are not strictly needed. They cost nothing and they say what
+you meant.</p>
+
+<h2>Do this now</h2>
+
+<p>In the workbook you just typed, build a Revenue column.</p>
+
+<div class="step">
+  <p>Click <span class="fx">E1</span> and type <span class="fx">Revenue</span>.</p>
+</div>
+<div class="step">
+  <p>Click <span class="fx">E2</span>. Type <span class="fx">=</span>, then <em>click</em>
+  cell C2, type <span class="fx">*</span>, then <em>click</em> cell D2, then press
+  <span class="kbd">Enter</span>. Clicking builds the reference for you and is faster than
+  typing it.</p>
+</div>
+<div class="step">
+  <p>Do the same for rows 3 to 7. Yes, this is tedious. Lesson 2 is entirely about
+  never doing it this way again.</p>
+</div>
+<div class="step">
+  <p>Change C2 to 150. Watch E2 change by itself. That moment is the whole lesson.</p>
+</div>
+
+<div class="drill" data-drill="order">
+  <p class="drill-q">Somebody sends you a workbook with <span class="fx">=850*1.2</span>
+  typed into a cell. Put the repair in order.</p>
+  <ul class="seq">
+    <li><button class="opt" data-pos="3">Replace the formula with one that points at those two cells</button></li>
+    <li><button class="opt" data-pos="1">Click the cell and read the formula bar to find the typed numbers</button></li>
+    <li><button class="opt" data-pos="4">Change an input and confirm the answer moves with it</button></li>
+    <li><button class="opt" data-pos="2">Put each typed number into its own labelled cell</button></li>
+  </ul>
+  <p class="feedback"></p>
+  <button class="drill-reset">Reset</button>
+</div>
+
+<div class="ask">
+  <p><strong>Ask your teacher.</strong> If anything above did not land, say so in chat.
+  Good questions here: why a cell sometimes shows <span class="fx">#####</span> instead of
+  a number, what the difference is between a formula and a function, or why your typed
+  formula came out as plain text.</p>
+</div>
+
+<div class="callout">
+  <p class="kicker">Read this next</p>
+  <p>Microsoft's <a href="https://support.microsoft.com/en-us/excel">Excel help and
+  learning</a> hub, the <em>Get started</em> section. It is the highest-trust source on
+  Excel and it says which features exist in which version, which no other site does
+  reliably.</p>
+  <p>Then go to <a href="0002-the-dollar-sign.html">lesson 2</a>, which turns the tedious
+  part of step 3 into one keystroke.</p>
+</div>
+
+<div class="footer">
+  <h3>References</h3>
+  <p>Microsoft, <a href="https://support.microsoft.com/en-us/excel">Excel help and
+  learning</a>, checked 2026-08-14. Function details throughout this course come from
+  <a href="https://support.microsoft.com/en-us/office/excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb">Excel
+  functions by category</a>. Full annotations in <a href="../RESOURCES.md">RESOURCES.md</a>.</p>
+  <p>Nothing in this lesson depends on your Excel version. It works the same in Excel
+  2016 and in Microsoft 365, on Windows and on Mac.</p>
+  <p class="nav">
+    <a href="../reference/0000-course-roadmap.html">Roadmap</a>
+    <a href="0002-the-dollar-sign.html">Next lesson</a>
+    <a href="../GLOSSARY.md">Glossary</a>
+    <a href="../MISSION.md">Mission</a>
+    <a href="../RESOURCES.md">Resources</a>
+  </p>
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
