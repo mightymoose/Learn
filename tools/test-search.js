@@ -30,8 +30,8 @@ check("every path is relative, not absolute",
   entries.map(e => e.path).join(", "));
 check("every path exists on disk",
   entries.every(e => fs.existsSync(path.join(ROOT, e.path))));
-check("type is only lesson or reference",
-  entries.every(e => ["lesson", "reference"].includes(e.type)));
+check("type is one of lesson, reference, deck",
+  entries.every(e => ["lesson", "reference", "deck"].includes(e.type)));
 
 console.log("\nEmpty query:");
 check("returns everything", filterEntries(entries, "", "all").length === entries.length);
@@ -63,7 +63,11 @@ const lessons = filterEntries(entries, "", "lesson");
 const refs = filterEntries(entries, "", "reference");
 check("lesson filter returns only lessons", lessons.every(e => e.type === "lesson") && lessons.length > 0);
 check("reference filter returns only reference", refs.every(e => e.type === "reference") && refs.length > 0);
-check("lesson + reference accounts for everything", lessons.length + refs.length === entries.length);
+const decks = filterEntries(entries, "", "deck");
+check("deck filter returns only decks", decks.every(e => e.type === "deck") && decks.length > 0);
+check("every type filter together accounts for everything",
+  lessons.length + refs.length + decks.length === entries.length);
+check("deck paths are .tsv import files", decks.every(e => e.path.endsWith(".tsv")));
 check("type and query combine",
   filterEntries(entries, "monoid", "reference").every(e => e.type === "reference"));
 

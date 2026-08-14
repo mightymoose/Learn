@@ -17,6 +17,10 @@ echo "=== page structure, links, drills ==="
 python3 tools/check-pages.py
 
 echo
+echo "=== anki decks ==="
+python3 tools/check-anki.py
+
+echo
 echo "=== drill behaviour ==="
 node tools/test-drills.js
 

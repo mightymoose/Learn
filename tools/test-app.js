@@ -128,7 +128,10 @@ if (flat) {
   check("card hrefs match indexed paths", cards.every(c => entries.some(e => e.path === c.props.href)));
   check("no card href is absolute", cards.every(c => !String(c.props.href).startsWith("/")));
   check("search input rendered", tags.some(n => n.props && n.props.class === "search"));
-  check("three filter chips rendered", tags.filter(n => n.props && n.props.class === "chip").length === 3);
+  const kinds = new Set(entries.map(e => e.type));
+  check("one chip per type plus All",
+    tags.filter(n => n.props && n.props.class === "chip").length === kinds.size + 1,
+    tags.filter(n => n.props && n.props.class === "chip").length + " chips for " + kinds.size + " types");
   check("subject headings rendered",
     tags.filter(n => n.props && n.props.class === "subject").length ===
       new Set(entries.map(e => e.subject)).size);

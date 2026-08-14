@@ -42,6 +42,51 @@ def meta(name, source, default=""):
     return html.unescape(m.group(1).strip()) if m else default
 
 
+def deck_entry(subject_dir, path, rel):
+    """Describe an Anki deck from the file itself. A .tsv carries no meta tags,
+    so the title comes from its #deck directive and the summary from its rows."""
+    directives = {}
+    rows = []
+    for line in open(path, encoding="utf-8").read().split("\n"):
+        if not line.strip():
+            continue
+        if line.startswith("#"):
+            if ":" in line:
+                k, v = line[1:].split(":", 1)
+                directives[k.strip()] = v.strip()
+        else:
+            rows.append(line)
+
+    deck_name = directives.get("deck", "")
+    leaf = deck_name.split("::")[-1] if deck_name else os.path.basename(path)
+
+    tags = set()
+    tags_col = directives.get("tags column")
+    if tags_col and tags_col.isdigit():
+        i = int(tags_col) - 1
+        for r in rows:
+            fields = r.split("\t")
+            if len(fields) > i:
+                tags.update(fields[i].split())
+
+    kinds = sorted(t.split("::")[-1] for t in tags if t.startswith("type::"))
+    covering = ", ".join(kinds) if kinds else "assorted cards"
+
+    return {
+        "title": "Anki deck · " + leaf,
+        "path": rel,
+        "subject": subject_dir.title(),
+        "type": "deck",
+        "source": "",
+        "section": leaf,
+        "order": "9998",
+        "status": "current",
+        "kicker": deck_name,
+        "summary": "%d cards to import into Anki, covering %s." % (len(rows), covering),
+        "tags": sorted(t.replace("::", " ") for t in tags),
+    }
+
+
 def collect():
     entries = []
     problems = []
@@ -91,13 +136,23 @@ def collect():
 
                 entries.append(entry)
 
+        anki_dir = os.path.join(subject_path, "anki")
+        if os.path.isdir(anki_dir):
+            for fname in sorted(os.listdir(anki_dir)):
+                if not fname.endswith(".tsv"):
+                    continue
+                p = os.path.join(anki_dir, fname)
+                rel = os.path.relpath(p, ROOT).replace(os.sep, "/")
+                entries.append(deck_entry(subject_dir, p, rel))
+
     def sort_key(e):
         try:
             primary = float(e["order"])
         except ValueError:
             primary = 9999.0
         # Lessons sort before reference cards covering the same section.
-        return (e["subject"].lower(), primary, 0 if e["type"] == "lesson" else 1)
+        rank = {"lesson": 0, "reference": 1, "deck": 2}.get(e["type"], 3)
+        return (e["subject"].lower(), primary, rank)
 
     entries.sort(key=sort_key)
     return entries, problems

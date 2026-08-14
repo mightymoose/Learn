@@ -21,6 +21,7 @@ search-filter.js    the matching logic, kept separate so it can be tested
   assets/           shared stylesheet and drill engine for this subject
   lessons/          NNNN-name.html, the teaching pages
   reference/        printable cards, the compressed version
+  anki/             NNNN-name.tsv, flashcard decks to import into Anki
   learning-records/ NNNN-name.md, decisions that steer future sessions
   sources/          the book itself, git-ignored
 ```
@@ -55,6 +56,7 @@ sh tools/check.sh
 |---|---|
 | `python3 tools/build-index.py` | Rebuild `search-index.js` from the pages |
 | `python3 tools/check-pages.py` | Tags, links, absolute paths, SVG, drill integrity |
+| `python3 tools/check-anki.py` | Deck directives, column counts, duplicate questions, field HTML |
 | `node tools/test-drills.js` | Clicks through every drill against the real engine |
 | `node tools/test-search.js` | The index search, against the real data |
 | `node tools/test-app.js` | Runs the real index app and checks what it renders |
