@@ -34,15 +34,14 @@ XIX, and Clifford algebras. One pattern, used about ten times.</p>
 
 <h2>What Lang actually says</h2>
 
-<blockquote>
-  <p>Let <span class="m">&Copf;</span> be a category. An object <span class="m">P</span> of
-  <span class="m">&Copf;</span> is called <strong>universally attracting</strong> if there
-  exists a unique morphism of each object of <span class="m">&Copf;</span> into
-  <span class="m">P</span>, and is called <strong>universally repelling</strong> if for
-  every object of <span class="m">&Copf;</span> there exists a unique morphism of
-  <span class="m">P</span> into this object.</p>
-  <cite>Lang, Algebra, 3rd rev. ed., p. 57</cite>
-</blockquote>
+<div class="callout">
+  <p class="kicker">Lang, p. 57, restated</p>
+  <p>Work inside a category <span class="m">&Copf;</span>. An object <span class="m">P</span>
+  is <strong>universally attracting</strong> when every object of <span class="m">&Copf;</span>
+  has exactly one morphism into <span class="m">P</span>. It is
+  <strong>universally repelling</strong> when <span class="m">P</span> has exactly one
+  morphism into every object of <span class="m">&Copf;</span>.</p>
+</div>
 
 <p>Read the direction carefully. It is the only thing that separates the two words.</p>
 
@@ -89,15 +88,14 @@ else follows from that.</p>
 
 <h2>The payoff, and why it is free</h2>
 
-<p>Here is the sentence that makes the definition worth learning.</p>
+<p>Here is the claim that makes the definition worth learning.</p>
 
-<blockquote>
-  <p>Since a universal object <span class="m">P</span> admits the identity morphism into
-  itself, it is clear that if <span class="m">P</span>, <span class="m">P&prime;</span>
-  are two universal objects in <span class="m">&Copf;</span>, then there exists a unique
-  isomorphism between them.</p>
-  <cite>Lang, Algebra, 3rd rev. ed., p. 58</cite>
-</blockquote>
+<div class="callout">
+  <p class="kicker">Lang, p. 58, restated</p>
+  <p>Any two universal objects of the same category are joined by a unique isomorphism.
+  Lang gives the reason in half a sentence. A universal object admits the identity
+  morphism into itself, and that single fact forces the result.</p>
+</div>
 
 <p>Lang compresses the proof into one clause. Papers compress it to nothing. Write it out
 once, in the attracting case, and you never need to write it again.</p>
@@ -144,16 +142,18 @@ argument. The identity morphism did all the work.</p>
 <p>Most universal properties in the wild do not look like Lang's definition. They look
 like the product. Lang defines it on p. 58.</p>
 
-<blockquote>
-  <p>By a <strong>product</strong> of <span class="m">A</span>, <span class="m">B</span>
-  &hellip; one means a triple <span class="m">(P, f, g)</span> &hellip; Given two morphisms
+<div class="callout">
+  <p class="kicker">Lang, p. 58, restated</p>
+  <p>A <strong>product</strong> of <span class="m">A</span> and <span class="m">B</span> is
+  a triple <span class="m">(P, f, g)</span>, where
+  <span class="m">f</span>&thinsp;:&thinsp;<span class="m">P &rarr; A</span> and
+  <span class="m">g</span>&thinsp;:&thinsp;<span class="m">P &rarr; B</span>. It must satisfy
+  one condition. Given any
   <span class="m">&phi;</span>&thinsp;:&thinsp;<span class="m">C &rarr; A</span> and
-  <span class="m">&psi;</span>&thinsp;:&thinsp;<span class="m">C &rarr; B</span> &hellip;
-  there exists a unique morphism
-  <span class="m">h</span>&thinsp;:&thinsp;<span class="m">C &rarr; P</span> which makes
-  the following diagram commutative.</p>
-  <cite>Lang, Algebra, 3rd rev. ed., p. 58</cite>
-</blockquote>
+  <span class="m">&psi;</span>&thinsp;:&thinsp;<span class="m">C &rarr; B</span>, exactly one
+  morphism <span class="m">h</span>&thinsp;:&thinsp;<span class="m">C &rarr; P</span> makes
+  the diagram below commute.</p>
+</div>
 
 <svg class="diagram" viewBox="0 0 340 210" width="340" role="img"
      aria-label="C above P, with A and B below. Unique dashed arrow h from C to P.">
@@ -191,13 +191,13 @@ like the product. Lang defines it on p. 58.</p>
 object of an ordinary category. Lang fixes this on the next page. He builds a category to
 fit.</p>
 
-<blockquote>
-  <p>We note that the product of <span class="m">A</span>, <span class="m">B</span> is
-  universal in the category whose objects consist of pairs of morphisms
-  <span class="m">f</span>&thinsp;:&thinsp;<span class="m">C &rarr; A</span> and
-  <span class="m">g</span>&thinsp;:&thinsp;<span class="m">C &rarr; B</span> &hellip;</p>
-  <cite>Lang, Algebra, 3rd rev. ed., p. 59</cite>
-</blockquote>
+<div class="callout">
+  <p class="kicker">Lang, p. 59, restated</p>
+  <p>The product of <span class="m">A</span> and <span class="m">B</span> is a universal
+  object, once you pick the right category. Take the category whose objects are the pairs
+  of morphisms <span class="m">f</span>&thinsp;:&thinsp;<span class="m">C &rarr; A</span>
+  and <span class="m">g</span>&thinsp;:&thinsp;<span class="m">C &rarr; B</span>.</p>
+</div>
 
 <p>That is the move. An object of the new category is a whole cone
 <span class="m">(C, f, g)</span>, not just <span class="m">C</span>. A morphism from
